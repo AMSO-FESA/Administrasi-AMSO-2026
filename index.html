@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persuratan AMSO 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #070913;
+            --card-bg: rgba(20, 26, 50, 0.65);
+            --card-border: rgba(0, 210, 255, 0.2);
+            --neon-blue: #00d2ff;
+            --neon-purple: #9d4edd;
+            --gold: #ffd700;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(0, 210, 255, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(157, 78, 221, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            padding: 40px 0 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 8px 16px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+            transform: translateX(-4px); 
+        }
+
+        .logo-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .logo-item {
+            background: transparent;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            box-shadow: none;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .logo-item:hover {
+            transform: scale(1.08);
+            filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.6));
+        }
+
+        .logo-item img {
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+        }
+
+        .logo-item img[alt="Logo Yasarini"] { height: 65px !important; }
+        .logo-item img[alt="Logo FESA"] { height: 100px !important; }
+        .logo-item img[alt="Logo AMSO"] { height: 100px !important; }
+
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--neon-blue) 60%, var(--neon-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 35px rgba(0, 210, 255, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .sub-title {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        /* ================= CONTENT GRID ================= */
+        main {
+            padding: 20px 0 60px;
+        }
+
+        .section-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 35px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .letters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .letter-card {
+            background: rgba(15, 21, 42, 0.8);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        }
+
+        .letter-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.2);
+        }
+
+        .letter-info h3 {
+            font-size: 1.05rem;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .letter-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .btn-drive {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.15), rgba(157, 78, 221, 0.15));
+            color: var(--neon-blue);
+            border: 1px solid rgba(0, 210, 255, 0.4);
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .btn-drive:hover {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background: rgba(5, 7, 15, 0.95);
+            border-top: 1px solid var(--card-border);
+            padding: 40px 0 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        footer strong {
+            font-size: 1.1rem;
+        }
+
+        footer p {
+            margin-top: 7px;
+            font-size: 0.85rem;
+            opacity: .55;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- ================= HEADER ================= -->
+        <header>
+            <a href="https://amso-fesa.github.io/AMSO-2026/" class="btn-back">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
+            </a>
+
+            <div class="logo-group">
+                <div class="logo-item">
+                    <img src="https://raw.githubusercontent.com/AMSO-FESA/AMSO-2026/main/yasarini.png" alt="Logo Yasarini" title="Yayasan Ardhya Garini">
+                </div>
+                <div class="logo-item">
+                    <img src="https://raw.githubusercontent.com/AMSO-FESA/AMSO-2026/main/fesa.png" alt="Logo FESA" title="Festival Edukasi Sekolah Angkasa">
+                </div>
+                <div class="logo-item">
+                    <img src="https://raw.githubusercontent.com/AMSO-FESA/AMSO-2026/main/amso.png" alt="Logo AMSO" title="Angkasa Mathematic and Science Olympiad">
+                </div>
+            </div>
+
+            <h1 class="main-title">PERSURATAN AMSO 2026</h1>
+            <div class="sub-title">Arsip Dokumen, Edaran, dan SK Resmi</div>
+        </header>
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <main>
+            <div class="section-box">
+                <div class="section-title"><i class="fa-solid fa-folder-open"></i> Daftar Dokumen & Persuratan</div>
+                
+                <div class="letters-grid">
+                    
+                    <!-- KARTU SURAT 1 -->
+                    <div class="letter-card">
+                        <div class="letter-info">
+                            <h3>Surat Edaran Pelaksanaan AMSO 2026</h3>
+                            <p>Surat pemberitahuan resmi terkait jadwal umum dan ketentuan awal pelaksanaan ajang olimpiade.</p>
+                        </div>
+                        <!-- Ganti link href di bawah dengan link file Google Drive spesifik -->
+                        <a href="URL_GOOGLE_DRIVE_ANDA_DI_SINI" target="_blank" class="btn-drive">
+                            <i class="fa-brands fa-google-drive"></i> Buka di Google Drive <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+                        </a>
+                    </div>
+
+                    <!-- KARTU SURAT 2 -->
+                    <div class="letter-card">
+                        <div class="letter-info">
+                            <h3>Buku Panduan & Juknis Jilid 1</h3>
+                            <p>Panduan teknis lengkap mengenai babak penyisihan, silabus mapel, dan regulasi peserta.</p>
+                        </div>
+                        <a href="URL_GOOGLE_DRIVE_ANDA_DI_SINI" target="_blank" class="btn-drive">
+                            <i class="fa-brands fa-google-drive"></i> Buka di Google Drive <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+                        </a>
+                    </div>
+
+                    <!-- KARTU SURAT 3 -->
+                    <div class="letter-card">
+                        <div class="letter-info">
+                            <h3>Format Berita Acara & Absensi</h3>
+                            <p>Template berkas laporan pelaksanaan ujian di masing-masing sekolah jajaran.</p>
+                        </div>
+                        <a href="URL_GOOGLE_DRIVE_ANDA_DI_SINI" target="_blank" class="btn-drive">
+                            <i class="fa-brands fa-google-drive"></i> Buka di Google Drive <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+                        </a>
+                    </div>
+
+                    <!-- KARTU SURAT 4 -->
+                    <div class="letter-card">
+                        <div class="letter-info">
+                            <h3>Pakta Integritas Kepala Sekolah</h3>
+                            <p>Lembar pernyataan komitmen pengawasan dan kejujuran pelaksanaan seleksi.</p>
+                        </div>
+                        <a href="URL_GOOGLE_DRIVE_ANDA_DI_SINI" target="_blank" class="btn-drive">
+                            <i class="fa-brands fa-google-drive"></i> Buka di Google Drive <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="container">
+            <strong>AMSO 2026</strong>
+            <p>&copy; 2026 Angkasa Mathematic and Science Olympiad. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
