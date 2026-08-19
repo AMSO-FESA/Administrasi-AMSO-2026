@@ -19,6 +19,7 @@
             --gold: #ffd700;
             --text-main: #f1f5f9;
             --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -39,6 +40,12 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(0, 210, 255, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(157, 78, 221, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
         }
 
         /* ================= ANIMASI LATAR BELAKANG KAYA SAINS & SPACE ================= */
@@ -144,7 +151,6 @@
             0% { transform: translateX(-50vw) translateY(0) rotate(0deg); }
             100% { transform: translateX(100vw) translateY(-30px) rotate(360deg); }
         }
-        /* ====================================================================== */
 
         .container {
             max-width: 1200px;
@@ -152,6 +158,7 @@
             padding: 0 20px;
             position: relative;
             z-index: 1;
+            width: 100%;
         }
 
         /* ================= HEADER ================= */
@@ -300,8 +307,9 @@
             margin-bottom: 25px;
         }
 
-        /* ================= CONTENT ================= */
+        /* ================= CONTENT (FLEX 1 AGAR FOOTER TERKUNCI DI BAWAH) ================= */
         main {
+            flex: 1;
             padding: 20px 0 60px;
         }
 
@@ -400,20 +408,21 @@
 
         /* ================= FOOTER ================= */
         footer {
-            background: rgba(5, 7, 15, 0.95);
-            border-top: 1px solid var(--card-border);
-            padding: 40px 0 20px;
-            margin-top: 40px;
+            background: #050811;
+            color: white;
+            padding: 35px 20px;
             text-align: center;
+            border-top: 1px solid var(--border);
+            width: 100%;
         }
 
         footer strong {
-            font-size: 1.1rem;
+            font-size: 18px;
         }
 
         footer p {
             margin-top: 7px;
-            font-size: 0.85rem;
+            font-size: 11px;
             opacity: .55;
         }
     </style>
@@ -441,8 +450,8 @@
         <div class="floating-icon el-math3">&radic;</div>
     </div>
 
+    <!-- ================= HEADER ================= -->
     <div class="container">
-        <!-- ================= HEADER ================= -->
         <header>
             <div class="logo-group">
                 <div class="logo-item">
@@ -476,36 +485,34 @@
             <h1 class="main-title">ADMINISTRASI AMSO 2026</h1>
             <div class="sub-title">Arsip Administrasi</div>
         </header>
-
-        <!-- ================= MAIN CONTENT ================= -->
-        <main>
-            <div class="section-box">
-                <div class="section-title"><i class="fa-solid fa-folder-open"></i> DAFTAR SURAT</div>
-                
-                <div class="letters-grid">
-                    
-                    <!-- KARTU SURAT 1: SURAT EDARAN TRYOUT -->
-                    <div class="letter-card">
-                        <div class="letter-info">
-                            <h3>Surat Edaran Pelaksanaan Tryout AMSO 2026</h3>
-                            <p>Surat pemberitahuan resmi terkait pelaksanaan Tryout</p>
-                        </div>
-                        <a href="https://drive.google.com/file/d/1ezADrPdOI9LZpC3yMRYKXPEPF0VDEp0l/view?usp=drive_link" target="_blank" class="btn-drive">
-                            <i class="fa-brands fa-google-drive"></i> SuratTryoutAMSO2026 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </main>
     </div>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="container">
+        <div class="section-box">
+            <div class="section-title"><i class="fa-solid fa-folder-open"></i> DAFTAR SURAT</div>
+            
+            <div class="letters-grid">
+                
+                <!-- KARTU SURAT 1: SURAT EDARAN TRYOUT -->
+                <div class="letter-card">
+                    <div class="letter-info">
+                        <h3>Surat Edaran Pelaksanaan Tryout AMSO 2026</h3>
+                        <p>Surat pemberitahuan resmi terkait pelaksanaan Tryout</p>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1ezADrPdOI9LZpC3yMRYKXPEPF0VDEp0l/view?usp=drive_link" target="_blank" class="btn-drive">
+                        <i class="fa-brands fa-google-drive"></i> SuratTryoutAMSO2026 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </main>
 
     <!-- ================= FOOTER ================= -->
     <footer>
-        <div class="container">
-            <strong>AMSO 2026</strong>
-            <p>&copy; 2026 Angkasa Mathematic and Science Olympiad. All Rights Reserved.</p>
-        </div>
+        <strong>AMSO 2026</strong>
+        <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
 
 </body>
