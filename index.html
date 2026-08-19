@@ -46,38 +46,12 @@
 
         /* ================= HEADER ================= */
         header {
-            padding: 40px 0 25px;
+            padding: 30px 0 25px;
             text-align: center;
             position: relative;
         }
 
-        .btn-back {
-            position: absolute;
-            top: 25px;
-            left: 30px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 8px 16px;
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .btn-back:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--neon-blue);
-            color: var(--neon-blue);
-            transform: translateX(-4px); 
-        }
-
+        /* Logo Group (Paling Atas) */
         .logo-group {
             display: flex;
             justify-content: center;
@@ -113,6 +87,90 @@
         .logo-item img[alt="Logo FESA"] { height: 100px !important; }
         .logo-item img[alt="Logo AMSO"] { height: 100px !important; }
 
+        /* Navigation Menu (Di Bawah Logo, Di Atas Judul) */
+        nav {
+            background: rgba(15, 21, 42, 0.8);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            padding: 8px;
+            backdrop-filter: blur(12px);
+            display: inline-flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: #fff;
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.3), rgba(157, 78, 221, 0.3));
+            border: 1px solid rgba(0, 210, 255, 0.5);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+        }
+
+        /* ================= DROPDOWN MENU FIX ================= */
+        .dropdown {
+            position: relative;
+            display: inline-flex;
+            padding-bottom: 15px; 
+            margin-bottom: -15px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%; 
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 21, 42, 0.95);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            min-width: 190px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .dropdown-content a {
+            color: var(--text-muted);
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(0, 210, 255, 0.15);
+            color: var(--neon-blue);
+            border: none;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Title Area (Paling Bawah di Header) */
         .main-title {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(2.2rem, 5vw, 3.5rem);
@@ -131,7 +189,7 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         /* ================= CONTENT GRID ================= */
@@ -257,10 +315,7 @@
     <div class="container">
         <!-- ================= HEADER ================= -->
         <header>
-            <a href="https://amso-fesa.github.io/AMSO-2026/" class="btn-back">
-                <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
-            </a>
-
+            <!-- 1. LOGO GROUP (Paling Atas) -->
             <div class="logo-group">
                 <div class="logo-item">
                     <img src="https://raw.githubusercontent.com/AMSO-FESA/AMSO-2026/main/yasarini.png" alt="Logo Yasarini" title="Yayasan Ardhya Garini">
@@ -273,6 +328,33 @@
                 </div>
             </div>
 
+            <!-- 2. NAVBAR (Di Bawah Logo, Di Atas Judul) -->
+            <nav>
+                <a href="https://amso-fesa.github.io/AMSO-2026/"><i class="fa-solid fa-house"></i> Beranda</a>
+                
+                <!-- LINK TIMELINE -->
+                <a href="https://amso-fesa.github.io/Timeline-AMSO-2026/"><i class="fa-solid fa-calendar-days"></i> Timeline</a>
+                
+                <!-- LINK KATEGORI -->
+                <a href="https://amso-fesa.github.io/Kategori-AMSO-2026/"><i class="fa-solid fa-layer-group"></i> Kategori</a>
+                
+                <a href="#"><i class="fa-solid fa-clipboard-check"></i> Buku Panduan</a>
+                
+                <!-- MENU DROPDOWN DATA -->
+                <div class="dropdown">
+                    <a href="#" class="active"><i class="fa-solid fa-folder-open"></i> Data <i class="fa-solid fa-angle-down" style="font-size: 10px; margin-left: 2px;"></i></a>
+                    <div class="dropdown-content">
+                        <!-- LINK REKAP PESERTA -->
+                        <a href="https://amso-fesa.github.io/Data-Peserta-AMSO-2026/"><i class="fa-solid fa-users" style="margin-right: 6px;"></i> Data Peserta</a>
+                        <!-- LINK PERSURATAN / ADMINISTRASI -->
+                        <a href="https://amso-fesa.github.io/Persuratan-AMSO-2026/" class="active"><i class="fa-solid fa-envelope-open-text" style="margin-right: 6px;"></i> Administrasi</a>
+                    </div>
+                </div>
+
+                <a href="#"><i class="fa-solid fa-trophy"></i> Pengumuman</a>
+            </nav>
+
+            <!-- 3. JUDUL UTAMA (Paling Bawah) -->
             <h1 class="main-title">PERSURATAN AMSO 2026</h1>
             <div class="sub-title">Arsip Persuratan</div>
         </header>
