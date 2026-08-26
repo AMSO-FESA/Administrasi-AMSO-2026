@@ -290,6 +290,43 @@
             word-break: break-all;
         }
 
+        /* PROGRESS BAR */
+        .progress-box {
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 15px;
+            background: rgba(15, 21, 42, 0.8);
+            border: 1px solid var(--card-border);
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--neon-blue);
+            font-weight: 600;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--gold));
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
         .btn-submit {
             background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
             color: #ffffff;
@@ -517,6 +554,17 @@
                         </div>
                     </div>
 
+                    <!-- PROGRESS BAR VISUAL -->
+                    <div id="progressBox" class="progress-box">
+                        <div class="progress-header">
+                            <span id="progressStatusText"><i class="fa-solid fa-circle-notch fa-spin"></i> Mempersiapkan pengiriman...</span>
+                            <span id="progressPercent">0%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                    </div>
+
                     <button type="submit" id="submitBtn" class="btn-submit">
                         <i class="fa-solid fa-paper-plane"></i> KIRIM DATA & BERKAS
                     </button>
@@ -532,7 +580,7 @@
         <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
 
-    <!-- SCRIPT PENGIRIMAN DATA CEPAT KE APPS SCRIPT -->
+    <!-- SCRIPT PENGIRIMAN DATA DENGAN PROGRESS INDIKATOR -->
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwVLjDXQnRf49xqBXet0eCimO0tcNZ_kEDMl3WD-7h7nLqxzAE2-NRvcqPIadYN-QdpKg/exec";
 
@@ -553,7 +601,7 @@
 
             if (file) {
                 if (file.size > 8 * 1024 * 1024) {
-                    alert("Ukuran file maksimal 8MB per file agar proses cepat.");
+                    alert("Ukuran file maksimal 8MB per file.");
                     input.value = "";
                     statusDisplay.innerText = "Belum ada file dipilih";
                     filesData[key] = null;
@@ -587,10 +635,32 @@
 
             const submitBtn = document.getElementById("submitBtn");
             const statusAlert = document.getElementById("statusAlert");
+            const progressBox = document.getElementById("progressBox");
+            const progressFill = document.getElementById("progressFill");
+            const progressPercent = document.getElementById("progressPercent");
+            const progressStatusText = document.getElementById("progressStatusText");
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengirim data ke Drive & Sheet...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengunggah...`;
             statusAlert.style.display = "none";
+            progressBox.style.display = "flex";
+
+            // Animasi Progress Bar Bertahap
+            let currentProgress = 0;
+            const progressInterval = setInterval(() => {
+                if (currentProgress < 30) {
+                    currentProgress += 5;
+                    progressStatusText.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Mengirim berkas ke Google Cloud...`;
+                } else if (currentProgress < 75) {
+                    currentProgress += 3;
+                    progressStatusText.innerHTML = `<i class="fa-solid fa-folder-tree"></i> Menyimpan ke Google Drive...`;
+                } else if (currentProgress < 90) {
+                    currentProgress += 1;
+                    progressStatusText.innerHTML = `<i class="fa-solid fa-table"></i> Mencatat di Google Spreadsheet...`;
+                }
+                progressFill.style.width = currentProgress + "%";
+                progressPercent.innerText = currentProgress + "%";
+            }, 500);
 
             const formData = new URLSearchParams();
             formData.append("schoolName", document.getElementById("schoolName").value);
@@ -615,21 +685,31 @@
                     body: formData.toString()
                 });
 
-                statusAlert.className = "status-alert status-success";
-                statusAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Berhasil!</strong> Data dan seluruh berkas Tryout telah terkirim dan tersimpan.`;
-                statusAlert.style.display = "flex";
+                clearInterval(progressInterval);
+                progressFill.style.width = "100%";
+                progressPercent.innerText = "100%";
+                progressStatusText.innerHTML = `<i class="fa-solid fa-check"></i> Selesai!`;
 
-                document.getElementById("tryoutForm").reset();
-                document.getElementById("statusSoal").innerText = "Belum ada file dipilih";
-                document.getElementById("statusHasil").innerText = "Belum ada file dipilih";
-                document.getElementById("statusDokumentasi").innerText = "Belum ada foto dipilih";
-                filesData.soal = null;
-                filesData.hasil = null;
-                filesData.dokumentasi = null;
+                setTimeout(() => {
+                    progressBox.style.display = "none";
+                    statusAlert.className = "status-alert status-success";
+                    statusAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Berhasil!</strong> Data dan seluruh berkas Tryout telah terkirim dan tersimpan.`;
+                    statusAlert.style.display = "flex";
+
+                    document.getElementById("tryoutForm").reset();
+                    document.getElementById("statusSoal").innerText = "Belum ada file dipilih";
+                    document.getElementById("statusHasil").innerText = "Belum ada file dipilih";
+                    document.getElementById("statusDokumentasi").innerText = "Belum ada foto dipilih";
+                    filesData.soal = null;
+                    filesData.hasil = null;
+                    filesData.dokumentasi = null;
+                }, 800);
 
             } catch (err) {
+                clearInterval(progressInterval);
+                progressBox.style.display = "none";
                 statusAlert.className = "status-alert status-error";
-                statusAlert.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Gagal:</strong> Terjadi kendala saat mengirim. Coba periksa koneksi.`;
+                statusAlert.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Gagal:</strong> Terjadi kendala koneksi saat mengirim.`;
                 statusAlert.style.display = "flex";
             } finally {
                 submitBtn.disabled = false;
