@@ -40,7 +40,7 @@
             background-attachment: fixed;
         }
 
-        /* SPACE ANIMATION */
+        /* ================= SPACE & FLOATING ICONS ================= */
         .space-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -70,6 +70,64 @@
         @keyframes floatBlob {
             0% { transform: translate(0, 0) scale(1); }
             100% { transform: translate(40px, 60px) scale(1.15); }
+        }
+
+        /* FLOATING ICONS STYLING */
+        .floating-icon {
+            position: absolute;
+            opacity: 0.55;
+            user-select: none;
+            filter: drop-shadow(0 0 12px currentColor);
+            z-index: 0;
+        }
+
+        /* Posisi Sisi Kiri */
+        .el-astronaut { top: 18%; left: 5%; font-size: 2.8rem; color: var(--gold); animation: floatItem1 9s infinite alternate ease-in-out; }
+        .el-atom { top: 38%; left: 6%; font-size: 2.4rem; color: var(--neon-blue); animation: rotateAtom 14s infinite linear; }
+        .el-dna { top: 58%; left: 4%; font-size: 2.2rem; color: #00f0ff; animation: floatItem2 11s infinite alternate ease-in-out; }
+        .el-math-pi { top: 78%; left: 7%; font-size: 2.3rem; font-family: 'Orbitron', sans-serif; color: var(--neon-purple); animation: floatItem1 8s infinite alternate ease-in-out; font-weight: 900; }
+
+        /* Posisi Sisi Kanan */
+        .el-rocket { top: 15%; right: 6%; font-size: 3rem; color: var(--neon-blue); animation: flyRocket 13s infinite ease-in-out; }
+        .el-microscope { top: 36%; right: 5%; font-size: 2.3rem; color: var(--neon-purple); animation: floatItem2 10s infinite alternate ease-in-out; }
+        .el-planet { top: 56%; right: 7%; font-size: 2.6rem; color: var(--gold); animation: rotatePlanet 18s infinite linear; }
+        .el-math-sigma { top: 76%; right: 6%; font-size: 2.4rem; font-family: 'Orbitron', sans-serif; color: var(--neon-blue); animation: floatItem1 9s infinite alternate ease-in-out; font-weight: 900; }
+
+        /* Posisi Melayang Tambahan */
+        .el-satellite { top: 6%; left: 35%; font-size: 2rem; color: var(--text-muted); animation: flySatellite 20s infinite linear; }
+        .el-flask { bottom: 8%; left: 18%; font-size: 2.1rem; color: #ff007f; animation: floatItem2 9s infinite alternate ease-in-out; }
+        .el-math-root { bottom: 10%; right: 20%; font-size: 2.2rem; font-family: 'Orbitron', sans-serif; color: var(--gold); animation: floatItem1 7s infinite alternate ease-in-out; font-weight: 900; }
+
+        @keyframes flyRocket {
+            0% { transform: translate(0, 0) rotate(45deg); }
+            50% { transform: translate(-30px, 45px) rotate(40deg); }
+            100% { transform: translate(0, 0) rotate(45deg); }
+        }
+
+        @keyframes floatItem1 {
+            0% { transform: translateY(0) rotate(-10deg); }
+            100% { transform: translateY(-40px) rotate(15deg); }
+        }
+
+        @keyframes floatItem2 {
+            0% { transform: translateY(0) rotate(10deg); }
+            100% { transform: translateY(35px) rotate(-15deg); }
+        }
+
+        @keyframes rotateAtom {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes rotatePlanet {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes flySatellite {
+            0% { transform: translateX(-40vw) translateY(0) rotate(0deg); }
+            100% { transform: translateX(100vw) translateY(-25px) rotate(360deg); }
         }
 
         .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; width: 100%; }
@@ -153,6 +211,8 @@
         .form-wrapper {
             max-width: 780px;
             margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
         .btn-back {
@@ -177,7 +237,7 @@
             border: 1px solid var(--card-border);
             border-radius: 20px;
             padding: 35px;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(14px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
@@ -204,7 +264,7 @@
             letter-spacing: 1px;
         }
 
-        /* UPLOAD FORM (SEMUA CENTER) */
+        /* UPLOAD FORM */
         .upload-form { display: flex; flex-direction: column; gap: 24px; }
         
         .form-group {
@@ -267,7 +327,6 @@
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.35);
         }
 
-        /* HELPER CARD (CENTERED) */
         .helper-card {
             width: 100%;
             background: rgba(15, 21, 42, 0.9);
@@ -314,7 +373,6 @@
             font-weight: bold;
         }
 
-        /* FILE UPLOAD BOX (CENTERED) */
         .file-upload-box {
             width: 100%;
             border: 2px dashed rgba(0, 210, 255, 0.35);
@@ -459,11 +517,29 @@
 </head>
 <body>
 
+    <!-- LATAR BELAKANG SAINS, MATEMATIKA & ANTARIKSA -->
     <div class="space-bg">
         <div class="stars"></div>
         <div class="galaxy-blob blob-1"></div>
         <div class="galaxy-blob blob-2"></div>
         <div class="galaxy-blob blob-3"></div>
+
+        <!-- IKON SISI KIRI -->
+        <div class="floating-icon el-astronaut" title="Astronot"><i class="fa-solid fa-user-astronaut"></i></div>
+        <div class="floating-icon el-atom" title="Fisika Kuantum/Atom"><i class="fa-solid fa-atom"></i></div>
+        <div class="floating-icon el-dna" title="Biologi Kuantum"><i class="fa-solid fa-dna"></i></div>
+        <div class="floating-icon el-math-pi" title="Pi">&pi;</div>
+
+        <!-- IKON SISI KANAN -->
+        <div class="floating-icon el-rocket" title="Roket Luar Angkasa"><i class="fa-solid fa-rocket"></i></div>
+        <div class="floating-icon el-microscope" title="Sains & Eksperimen"><i class="fa-solid fa-microscope"></i></div>
+        <div class="floating-icon el-planet" title="Planet Orbit"><i class="fa-solid fa-earth-americas"></i></div>
+        <div class="floating-icon el-math-sigma" title="Sigma">&sum;</div>
+
+        <!-- IKON LATAR TAMBAHAN -->
+        <div class="floating-icon el-satellite" title="Satelit Orbit"><i class="fa-solid fa-satellite"></i></div>
+        <div class="floating-icon el-flask" title="Laboratorium Kimia"><i class="fa-solid fa-flask-vial"></i></div>
+        <div class="floating-icon el-math-root" title="Akar Kuadrat">&radic;</div>
     </div>
 
     <div class="container">
