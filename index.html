@@ -61,7 +61,6 @@
             background: radial-gradient(circle at 50% 50%, #0b0f25 0%, #03050a 100%);
         }
 
-        /* Bintang Berkelap-kelip */
         .stars {
             position: absolute;
             width: 100%;
@@ -83,7 +82,6 @@
             100% { opacity: 0.8; }
         }
 
-        /* Galaksi / Nebula Melayang */
         .galaxy-blob {
             position: absolute;
             border-radius: 50%;
@@ -101,7 +99,6 @@
             100% { transform: translate(40px, 60px) scale(1.15); }
         }
 
-        /* Elemen Melayang */
         .floating-icon {
             position: absolute;
             color: var(--neon-blue);
@@ -114,13 +111,11 @@
         .el-astronaut1 { bottom: 15%; left: 4%; font-size: 2.5rem; color: var(--gold); animation: floatItem1 11s infinite alternate ease-in-out; }
         .el-astronaut2 { top: 35%; left: 8%; font-size: 2rem; color: var(--neon-purple); animation: floatItem2 9s infinite alternate ease-in-out; opacity: 0.4; }
         
-        /* Alat Fisika & Sains */
         .el-atom { top: 18%; left: 15%; font-size: 2.2rem; color: var(--gold); animation: rotateAtom 12s infinite linear; }
         .el-flask { bottom: 25%; right: 12%; font-size: 2.3rem; color: var(--neon-blue); animation: floatItem1 8s infinite alternate ease-in-out; }
         .el-magnet { top: 60%; left: 12%; font-size: 2.2rem; color: #ff4757; animation: floatItem2 10s infinite alternate ease-in-out; }
         .el-satellite { top: 8%; left: 40%; font-size: 2.2rem; color: var(--text-muted); animation: flySatellite 16s infinite linear; }
 
-        /* Simbol Matematika */
         .el-math1 { top: 25%; right: 25%; font-size: 2rem; font-family: 'Orbitron', sans-serif; color: var(--gold); animation: floatItem2 7s infinite alternate ease-in-out; font-weight: 800; }
         .el-math2 { top: 75%; left: 25%; font-size: 2.2rem; font-family: 'Orbitron', sans-serif; color: var(--neon-blue); animation: floatItem1 9s infinite alternate ease-in-out; font-weight: 800; }
         .el-math3 { top: 50%; right: 8%; font-size: 1.8rem; font-family: 'Orbitron', sans-serif; color: var(--neon-purple); animation: floatItem2 8s infinite alternate ease-in-out; font-weight: 800; }
@@ -238,7 +233,6 @@
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
         }
 
-        /* Dropdown */
         .dropdown {
             position: relative;
             display: inline-flex;
@@ -274,7 +268,7 @@
             transition: all 0.2s ease;
         }
 
-        .dropdown-content a:hover {
+        .dropdown-content a:hover, .dropdown-content a.active {
             background: rgba(0, 210, 255, 0.15);
             color: var(--neon-blue);
             border: none;
@@ -307,7 +301,7 @@
             margin-bottom: 25px;
         }
 
-        /* ================= CONTENT LAYOUT (DUA KOLOM) ================= */
+        /* ================= CONTENT LAYOUT ================= */
         main {
             flex: 1;
             padding: 20px 0 60px;
@@ -315,12 +309,12 @@
 
         .admin-layout {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1.35fr;
             gap: 30px;
             align-items: start;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 960px) {
             .admin-layout {
                 grid-template-columns: 1fr;
             }
@@ -330,10 +324,9 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 30px;
+            padding: 28px;
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            height: auto;
         }
 
         .section-title {
@@ -346,6 +339,7 @@
             gap: 10px;
         }
 
+        /* Surat Card */
         .letters-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -375,19 +369,10 @@
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
         }
 
-        .letter-card.form-card::before {
-            background: linear-gradient(90deg, var(--neon-purple), var(--gold));
-        }
-
         .letter-card:hover {
             transform: translateY(-4px);
             border-color: var(--neon-blue);
             box-shadow: 0 10px 25px rgba(0, 210, 255, 0.2);
-        }
-
-        .letter-card.form-card:hover {
-            border-color: var(--neon-purple);
-            box-shadow: 0 10px 25px rgba(157, 78, 221, 0.25);
         }
 
         .letter-info h3 {
@@ -401,10 +386,8 @@
             font-size: 0.85rem;
             color: var(--text-muted);
             line-height: 1.5;
-            margin-top: 4px;
         }
 
-        /* Tombol Google Drive */
         .btn-drive {
             display: inline-flex;
             align-items: center;
@@ -429,29 +412,191 @@
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
         }
 
-        /* Tombol Google Form */
-        .btn-form {
+        /* ================= UPLOAD FORM STYLING ================= */
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(11, 16, 35, 0.85);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .form-control option {
+            background-color: #0b1023;
+            color: #fff;
+        }
+
+        .form-control optgroup {
+            color: var(--gold);
+            font-weight: 700;
+            background: #070a17;
+        }
+
+        /* Helper Box Deskripsi & Download Link */
+        .helper-card {
+            background: rgba(15, 21, 42, 0.9);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-left: 4px solid var(--gold);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 6px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .helper-card a {
+            color: var(--gold);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 4px;
+        }
+
+        .helper-card a:hover {
+            text-decoration: underline;
+        }
+
+        .helper-card ul {
+            margin-left: 18px;
+            margin-top: 5px;
+            color: #cbd5e1;
+        }
+
+        /* File Upload Box */
+        .file-upload-box {
+            border: 2px dashed rgba(0, 210, 255, 0.35);
+            background: rgba(15, 21, 42, 0.6);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .file-upload-box:hover {
+            border-color: var(--neon-purple);
+            background: rgba(157, 78, 221, 0.08);
+        }
+
+        .file-upload-box i {
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .file-upload-box span {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .file-upload-box input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-status-text {
+            font-size: 0.82rem;
+            color: var(--gold);
+            margin-top: 6px;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #ffffff;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2), rgba(255, 215, 0, 0.15));
-            color: #e0aaff;
-            border: 1px solid rgba(157, 78, 221, 0.5);
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.85rem;
+            gap: 10px;
             transition: all 0.3s ease;
-            align-self: flex-start;
+            margin-top: 10px;
+            box-shadow: 0 4px 20px rgba(0, 210, 255, 0.35);
         }
 
-        .btn-form:hover {
-            background: linear-gradient(135deg, var(--neon-purple), #7b2cbf);
-            color: #ffffff;
-            border-color: transparent;
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.6);
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.7);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Status Alert */
+        .status-alert {
+            display: none;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-top: 10px;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-success {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            color: #4ade80;
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #f87171;
         }
 
         /* ================= FOOTER ================= */
@@ -531,7 +676,7 @@
             </nav>
 
             <h1 class="main-title">ADMINISTRASI AMSO 2026</h1>
-            <div class="sub-title">Arsip Surat & Pengumpulan Data</div>
+            <div class="sub-title">Arsip Surat & Pengumpulan Hasil Tryout</div>
         </header>
     </div>
 
@@ -544,7 +689,7 @@
                 <div class="section-title"><i class="fa-solid fa-folder-open"></i> DAFTAR SURAT</div>
                 
                 <div class="letters-grid">
-                    <!-- KARTU SURAT 1: SURAT EDARAN TRYOUT -->
+                    <!-- KARTU SURAT 1 -->
                     <div class="letter-card">
                         <div class="letter-info">
                             <h3>Surat Edaran Pelaksanaan Tryout AMSO 2026</h3>
@@ -557,21 +702,130 @@
                 </div>
             </div>
 
-            <!-- KOLOM KANAN: UPLOAD & FORM DATA (GOOGLE FORM) -->
+            <!-- KOLOM KANAN: FORM PENGISIAN & UPLOAD DATA TRYOUT -->
             <div class="section-box">
-                <div class="section-title"><i class="fa-solid fa-cloud-arrow-up"></i> UPLOAD DATA</div>
+                <div class="section-title"><i class="fa-solid fa-cloud-arrow-up"></i> HASIL TRYOUT AMSO 2026</div>
                 
-                <div class="letters-grid">
-                    <!-- KARTU FORM 1: HASIL TRYOUT -->
-                    <div class="letter-card form-card">
-                        <div class="letter-info">
-                            <h3>Form Pengumpulan Hasil Tryout</h3>
-                        </div>
-                        <a href="https://forms.gle/t6ynay3AneYj9HC97" target="_blank" class="btn-form">
-                            <i class="fa-solid fa-file-lines"></i> FormHasilTryout <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-                        </a>
+                <form id="tryoutForm" class="upload-form">
+                    
+                    <!-- 1. NAMA SEKOLAH -->
+                    <div class="form-group">
+                        <label for="schoolName"><i class="fa-solid fa-school"></i> NAMA SEKOLAH <span style="color: #ff4d4f;">*</span></label>
+                        <select id="schoolName" class="form-control" required>
+                            <option value="" disabled selected>-- Pilih Nama Sekolah --</option>
+                            
+                            <optgroup label="--- TINGKAT SD / MI ---">
+                                <option value="SD ATS">SD ATS</option>
+                                <option value="SD HLM 1">SD HLM 1</option>
+                                <option value="SD HLM 3">SD HLM 3</option>
+                                <option value="SD HLM 4">SD HLM 4</option>
+                                <option value="SD HLM 5">SD HLM 5</option>
+                                <option value="SD HLM 7">SD HLM 7</option>
+                                <option value="SD HLM 9">SD HLM 9</option>
+                                <option value="SD HLM 10">SD HLM 10</option>
+                                <option value="SD HLM 12">SD HLM 12</option>
+                                <option value="SD HSN 1">SD HSN 1</option>
+                                <option value="SD HSN 3">SD HSN 3</option>
+                                <option value="SD RSN">SD RSN</option>
+                                <option value="SD SUT 1">SD SUT 1</option>
+                                <option value="SD SWO">SD SWO</option>
+                                <option value="SD HND 1">SD HND 1</option>
+                                <option value="SD HND 2">SD HND 2</option>
+                                <option value="SD HND 3">SD HND 3</option>
+                                <option value="SD MUL">SD MUL</option>
+                                <option value="SD SMO">SD SMO</option>
+                                <option value="SD PTM">SD PTM</option>
+                                <option value="SD MNA">SD MNA</option>
+                                <option value="SD ELI">SD ELI</option>
+                                <option value="MI LWM">MI LWM</option>
+                                <option value="SD SPR">SD SPR</option>
+                            </optgroup>
+
+                            <optgroup label="--- TINGKAT SMP / MTs ---">
+                                <option value="SMP HLM">SMP HLM</option>
+                                <option value="SMP ATS">SMP ATS</option>
+                                <option value="SMP HSN">SMP HSN</option>
+                                <option value="SMP SWO">SMP SWO</option>
+                                <option value="SMP SUT">SMP SUT</option>
+                                <option value="SMP BNY">SMP BNY</option>
+                                <option value="SMP HND">SMP HND</option>
+                                <option value="SMP ABD">SMP ABD</option>
+                                <option value="SMP ELI">SMP ELI</option>
+                                <option value="SMP PTM">SMP PTM</option>
+                                <option value="MTs LWM">MTs LWM</option>
+                                <option value="SMP MNA">SMP MNA</option>
+                                <option value="SMP SLM">SMP SLM</option>
+                                <option value="SMP SMO">SMP SMO</option>
+                                <option value="SMP ADI">SMP ADI</option>
+                            </optgroup>
+
+                            <optgroup label="--- TINGKAT SMA ---">
+                                <option value="SMA HLM 1">SMA HLM 1</option>
+                                <option value="SMA HLM 2">SMA HLM 2</option>
+                                <option value="SMA HSN">SMA HSN</option>
+                                <option value="SMA ADI">SMA ADI</option>
+                                <option value="SMA SLM">SMA SLM</option>
+                                <option value="SMA HND">SMA HND</option>
+                                <option value="SMA PTM">SMA PTM</option>
+                                <option value="SMA SWO">SMA SWO</option>
+                            </optgroup>
+                        </select>
                     </div>
-                </div>
+
+                    <!-- 2. SOAL TRYOUT (UPLOAD FILE Doc/Pdf) -->
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-file-lines"></i> SOAL TRYOUT (DOC / PDF) <span style="color: #ff4d4f;">*</span></label>
+                        <div class="file-upload-box">
+                            <i class="fa-solid fa-file-arrow-up"></i>
+                            <span>Klik untuk upload naskah Soal Tryout (.pdf, .doc, .docx)</span>
+                            <div id="statusSoal" class="file-status-text">Belum ada file dipilih</div>
+                            <input type="file" id="inputSoal" accept=".pdf,.doc,.docx" required onchange="processFile(this, 'statusSoal', 'soal')">
+                        </div>
+                    </div>
+
+                    <!-- 3. HASIL TRYOUT (UPLOAD FILE Excel + DESKRIPSI) -->
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-file-excel"></i> HASIL TRYOUT (EXCEL) <span style="color: #ff4d4f;">*</span></label>
+                        
+                        <div class="helper-card">
+                            <a href="https://docs.google.com/spreadsheets/d/1H5porMxhIzHXoQC-zPeaOOAAiF8OTxM6" target="_blank">
+                                <i class="fa-solid fa-download"></i> Link Download Format Hasil Tryout <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.7rem;"></i>
+                            </a>
+                            <ul>
+                                <li>Tryout dilaksanakan 5x/mapel</li>
+                                <li>Nilai digabung menjadi 1 file (lihat format)</li>
+                            </ul>
+                        </div>
+
+                        <div class="file-upload-box">
+                            <i class="fa-solid fa-file-excel" style="color: #10b981;"></i>
+                            <span>Klik untuk upload Rekap Nilai Tryout (.xlsx, .xls)</span>
+                            <div id="statusHasil" class="file-status-text">Belum ada file dipilih</div>
+                            <input type="file" id="inputHasil" accept=".xlsx,.xls" required onchange="processFile(this, 'statusHasil', 'hasil')">
+                        </div>
+                    </div>
+
+                    <!-- 4. DOKUMENTASI (FOTO / GAMBAR) -->
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-camera"></i> DOKUMENTASI PELAKSANAAN (FOTO) <span style="color: #ff4d4f;">*</span></label>
+                        <div class="helper-card" style="border-left-color: var(--neon-purple);">
+                            <span><i class="fa-solid fa-circle-info"></i> Upload 1 foto pelaksanaan Tryout.</span>
+                        </div>
+                        <div class="file-upload-box">
+                            <i class="fa-solid fa-image" style="color: #ec4899;"></i>
+                            <span>Klik untuk upload Foto Dokumentasi (.jpg, .jpeg, .png)</span>
+                            <div id="statusDokumentasi" class="file-status-text">Belum ada foto dipilih</div>
+                            <input type="file" id="inputDokumentasi" accept="image/*" required onchange="processFile(this, 'statusDokumentasi', 'dokumentasi')">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn-submit">
+                        <i class="fa-solid fa-paper-plane"></i> KIRIM DATA & BERKAS
+                    </button>
+
+                    <!-- Alert Notifikasi -->
+                    <div id="statusAlert" class="status-alert"></div>
+                </form>
             </div>
 
         </div>
@@ -582,6 +836,106 @@
         <strong>AMSO 2026</strong>
         <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
+
+    <!-- SCRIPT LOGIKA PENGIRIMAN DATA FORM -->
+    <script>
+        // URL Google Apps Script Web App
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwVLjDXQnRf49xqBXet0eCimO0tcNZ_kEDMl3WD-7h7nLqxzAE2-NRvcqPladYN-QdpKg/exec";
+
+        // Objek penampung data file base64
+        const filesData = {
+            soal: null,
+            hasil: null,
+            dokumentasi: null
+        };
+
+        function processFile(input, statusElementId, key) {
+            const file = input.files[0];
+            const statusDisplay = document.getElementById(statusElementId);
+
+            if (file) {
+                // Batas ukuran maksimal file (15MB/file)
+                if (file.size > 15 * 1024 * 1024) {
+                    alert("Ukuran file terlalu besar! Maksimal 15MB per file.");
+                    input.value = "";
+                    statusDisplay.innerText = "Belum ada file dipilih";
+                    filesData[key] = null;
+                    return;
+                }
+
+                statusDisplay.innerHTML = `<i class="fa-solid fa-check-circle" style="color: #4ade80;"></i> ${file.name} (${(file.size / (1024*1024)).toFixed(2)} MB)`;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    filesData[key] = {
+                        fileName: file.name,
+                        mimeType: file.type || "application/octet-stream",
+                        fileData: e.target.result.split(",")[1] // Ambil base64 string
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.getElementById("tryoutForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            // Validasi ketiga file wajib dipilih
+            if (!filesData.soal || !filesData.hasil || !filesData.dokumentasi) {
+                alert("Harap pilih ketiga berkas (Soal, Rekap Hasil, dan Foto Dokumentasi) sebelum mengirim!");
+                return;
+            }
+
+            const submitBtn = document.getElementById("submitBtn");
+            const statusAlert = document.getElementById("statusAlert");
+
+            // Tampilkan status loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengunggah berkas... Mohon tunggu`;
+            statusAlert.style.display = "none";
+
+            const payload = {
+                schoolName: document.getElementById("schoolName").value,
+                fileSoal: filesData.soal,
+                fileHasil: filesData.hasil,
+                fileDokumentasi: filesData.dokumentasi
+            };
+
+            try {
+                // Kirim request ke Google Apps Script
+                await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                // Sukses terkirim
+                statusAlert.className = "status-alert status-success";
+                statusAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Berhasil!</strong> Data dan seluruh berkas Tryout telah berhasil dikirim.`;
+                statusAlert.style.display = "flex";
+                
+                // Reset formulir & state
+                document.getElementById("tryoutForm").reset();
+                document.getElementById("statusSoal").innerText = "Belum ada file dipilih";
+                document.getElementById("statusHasil").innerText = "Belum ada file dipilih";
+                document.getElementById("statusDokumentasi").innerText = "Belum ada foto dipilih";
+                filesData.soal = null;
+                filesData.hasil = null;
+                filesData.dokumentasi = null;
+
+            } catch (err) {
+                statusAlert.className = "status-alert status-error";
+                statusAlert.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Gagal:</strong> Terjadi kendala saat mengirim berkas. Silakan coba lagi.`;
+                statusAlert.style.display = "flex";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> KIRIM DATA & BERKAS`;
+            }
+        });
+    </script>
 
 </body>
 </html>
