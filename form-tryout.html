@@ -201,15 +201,45 @@
             margin-bottom: 25px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding-bottom: 15px;
+            text-align: center;
         }
 
         /* UPLOAD FORM */
         .upload-form { display: flex; flex-direction: column; gap: 22px; }
         .form-group { display: flex; flex-direction: column; gap: 8px; }
         .form-group label { font-size: 0.9rem; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 8px; }
+
+        /* CENTER FORM GROUP (NAMA SEKOLAH) */
+        .form-group-center label {
+            justify-content: center;
+            text-align: center;
+        }
+
+        .select-centered {
+            text-align: center;
+            text-align-last: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .select-centered option {
+            text-align: center;
+            font-weight: 500;
+            background-color: #0b1023;
+            color: #fff;
+            padding: 8px;
+        }
+
+        .select-centered optgroup {
+            color: var(--gold);
+            font-weight: 800;
+            background: #070a17;
+            text-align: center;
+        }
 
         .form-control {
             width: 100%;
@@ -228,9 +258,6 @@
             border-color: var(--neon-blue);
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.35);
         }
-
-        .form-control option { background-color: #0b1023; color: #fff; }
-        .form-control optgroup { color: var(--gold); font-weight: 700; background: #070a17; }
 
         .helper-card {
             background: rgba(15, 21, 42, 0.9);
@@ -290,30 +317,33 @@
             word-break: break-all;
         }
 
-        /* PROGRESS BAR */
+        /* MINIMALIST PROGRESS BAR */
         .progress-box {
             display: none;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             margin-top: 15px;
-            background: rgba(15, 21, 42, 0.8);
-            border: 1px solid var(--card-border);
-            padding: 16px;
-            border-radius: 12px;
+            background: rgba(11, 16, 35, 0.7);
+            border: 1px solid rgba(0, 210, 255, 0.25);
+            padding: 16px 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
         .progress-header {
             display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
+            justify-content: flex-end;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
             color: var(--neon-blue);
-            font-weight: 600;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
         .progress-track {
             width: 100%;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.08);
+            height: 8px;
+            background: rgba(255, 255, 255, 0.07);
             border-radius: 10px;
             overflow: hidden;
             position: relative;
@@ -324,6 +354,7 @@
             width: 0%;
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--gold));
             border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
             transition: width 0.4s ease;
         }
 
@@ -443,13 +474,13 @@
                 
                 <form id="tryoutForm" class="upload-form">
                     
-                    <!-- 1. NAMA SEKOLAH -->
-                    <div class="form-group">
+                    <!-- 1. NAMA SEKOLAH (CENTERED) -->
+                    <div class="form-group form-group-center">
                         <label for="schoolName"><i class="fa-solid fa-school"></i> NAMA SEKOLAH <span style="color: #ff4d4f;">*</span></label>
-                        <select id="schoolName" class="form-control" required>
+                        <select id="schoolName" class="form-control select-centered" required>
                             <option value="" disabled selected>-- Pilih Nama Sekolah --</option>
                             
-                            <optgroup label="--- TINGKAT SD / MI ---">
+                            <optgroup label="─── TINGKAT SD / MI ───">
                                 <option value="SD ATS">SD ATS</option>
                                 <option value="SD HLM 1">SD HLM 1</option>
                                 <option value="SD HLM 3">SD HLM 3</option>
@@ -476,7 +507,7 @@
                                 <option value="SD SPR">SD SPR</option>
                             </optgroup>
 
-                            <optgroup label="--- TINGKAT SMP / MTs ---">
+                            <optgroup label="─── TINGKAT SMP / MTs ───">
                                 <option value="SMP HLM">SMP HLM</option>
                                 <option value="SMP ATS">SMP ATS</option>
                                 <option value="SMP HSN">SMP HSN</option>
@@ -494,7 +525,7 @@
                                 <option value="SMP ADI">SMP ADI</option>
                             </optgroup>
 
-                            <optgroup label="--- TINGKAT SMA ---">
+                            <optgroup label="─── TINGKAT SMA ───">
                                 <option value="SMA HLM 1">SMA HLM 1</option>
                                 <option value="SMA HLM 2">SMA HLM 2</option>
                                 <option value="SMA HSN">SMA HSN</option>
@@ -554,10 +585,9 @@
                         </div>
                     </div>
 
-                    <!-- PROGRESS BAR VISUAL -->
+                    <!-- MINIMALIST PROGRESS BAR -->
                     <div id="progressBox" class="progress-box">
                         <div class="progress-header">
-                            <span id="progressStatusText"><i class="fa-solid fa-circle-notch fa-spin"></i> Mempersiapkan pengiriman...</span>
                             <span id="progressPercent">0%</span>
                         </div>
                         <div class="progress-track">
@@ -638,29 +668,24 @@
             const progressBox = document.getElementById("progressBox");
             const progressFill = document.getElementById("progressFill");
             const progressPercent = document.getElementById("progressPercent");
-            const progressStatusText = document.getElementById("progressStatusText");
 
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengunggah...`;
             statusAlert.style.display = "none";
             progressBox.style.display = "flex";
 
-            // Animasi Progress Bar Bertahap
             let currentProgress = 0;
             const progressInterval = setInterval(() => {
-                if (currentProgress < 30) {
-                    currentProgress += 5;
-                    progressStatusText.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Mengirim berkas ke Google Cloud...`;
-                } else if (currentProgress < 75) {
+                if (currentProgress < 40) {
+                    currentProgress += 6;
+                } else if (currentProgress < 80) {
                     currentProgress += 3;
-                    progressStatusText.innerHTML = `<i class="fa-solid fa-folder-tree"></i> Menyimpan ke Google Drive...`;
-                } else if (currentProgress < 90) {
+                } else if (currentProgress < 94) {
                     currentProgress += 1;
-                    progressStatusText.innerHTML = `<i class="fa-solid fa-table"></i> Mencatat di Google Spreadsheet...`;
                 }
                 progressFill.style.width = currentProgress + "%";
                 progressPercent.innerText = currentProgress + "%";
-            }, 500);
+            }, 450);
 
             const formData = new URLSearchParams();
             formData.append("schoolName", document.getElementById("schoolName").value);
@@ -688,7 +713,6 @@
                 clearInterval(progressInterval);
                 progressFill.style.width = "100%";
                 progressPercent.innerText = "100%";
-                progressStatusText.innerHTML = `<i class="fa-solid fa-check"></i> Selesai!`;
 
                 setTimeout(() => {
                     progressBox.style.display = "none";
