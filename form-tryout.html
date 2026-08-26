@@ -151,7 +151,7 @@
             letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 25px;
         }
 
-        /* FORM CONTAINER CENTERED */
+        /* FORM CONTAINER */
         main { flex: 1; padding: 10px 0 60px; }
         
         .form-wrapper {
@@ -532,36 +532,48 @@
         <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
 
-    <!-- SCRIPT PENGIRIMAN DATA KE APPS SCRIPT -->
+    <!-- SCRIPT PENGIRIMAN DATA CEPAT KE APPS SCRIPT -->
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwVLjDXQnRf49xqBXet0eCimO0tcNZ_kEDMl3WD-7h7nLqxzAE2-NRvcqPIadYN-QdpKg/exec";
 
         const filesData = { soal: null, hasil: null, dokumentasi: null };
 
-        function processFile(input, statusElementId, key) {
+        function readFileAsBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(",")[1]);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function processFile(input, statusElementId, key) {
             const file = input.files[0];
             const statusDisplay = document.getElementById(statusElementId);
 
             if (file) {
-                if (file.size > 15 * 1024 * 1024) {
-                    alert("Ukuran file terlalu besar! Maksimal 15MB per file.");
+                if (file.size > 8 * 1024 * 1024) {
+                    alert("Ukuran file maksimal 8MB per file agar proses cepat.");
                     input.value = "";
                     statusDisplay.innerText = "Belum ada file dipilih";
                     filesData[key] = null;
                     return;
                 }
 
-                statusDisplay.innerHTML = `<i class="fa-solid fa-check-circle" style="color: #4ade80;"></i> ${file.name} (${(file.size / (1024*1024)).toFixed(2)} MB)`;
+                statusDisplay.innerHTML = `<i class="fa-solid fa-spinner fa-spin" style="color: var(--neon-blue);"></i> Membaca file...`;
 
-                const reader = new FileReader();
-                reader.onload = function(e) {
+                try {
+                    const base64 = await readFileAsBase64(file);
                     filesData[key] = {
-                        fileName: file.name,
-                        mimeType: file.type || "application/octet-stream",
-                        fileData: e.target.result.split(",")[1]
+                        name: file.name,
+                        mime: file.type || "application/octet-stream",
+                        data: base64
                     };
-                };
-                reader.readAsDataURL(file);
+                    statusDisplay.innerHTML = `<i class="fa-solid fa-check-circle" style="color: #4ade80;"></i> ${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
+                } catch (e) {
+                    statusDisplay.innerText = "Gagal memproses file lokal.";
+                    filesData[key] = null;
+                }
             }
         }
 
@@ -569,7 +581,7 @@
             e.preventDefault();
 
             if (!filesData.soal || !filesData.hasil || !filesData.dokumentasi) {
-                alert("Harap pilih ketiga berkas (Soal, Rekap Hasil, dan Foto Dokumentasi) sebelum mengirim!");
+                alert("Harap lengkapi ketiga file berkas sebelum mengirim!");
                 return;
             }
 
@@ -577,28 +589,36 @@
             const statusAlert = document.getElementById("statusAlert");
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengunggah berkas... Mohon tunggu`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengirim data ke Drive & Sheet...`;
             statusAlert.style.display = "none";
 
-            const payload = {
-                schoolName: document.getElementById("schoolName").value,
-                fileSoal: filesData.soal,
-                fileHasil: filesData.hasil,
-                fileDokumentasi: filesData.dokumentasi
-            };
+            const formData = new URLSearchParams();
+            formData.append("schoolName", document.getElementById("schoolName").value);
+            
+            formData.append("fileSoalName", filesData.soal.name);
+            formData.append("fileSoalMime", filesData.soal.mime);
+            formData.append("fileSoalData", filesData.soal.data);
+
+            formData.append("fileHasilName", filesData.hasil.name);
+            formData.append("fileHasilMime", filesData.hasil.mime);
+            formData.append("fileHasilData", filesData.hasil.data);
+
+            formData.append("fileDokName", filesData.dokumentasi.name);
+            formData.append("fileDokMime", filesData.dokumentasi.mime);
+            formData.append("fileDokData", filesData.dokumentasi.data);
 
             try {
                 await fetch(SCRIPT_URL, {
                     method: "POST",
                     mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: formData.toString()
                 });
 
                 statusAlert.className = "status-alert status-success";
-                statusAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Berhasil!</strong> Data dan seluruh berkas Tryout telah berhasil dikirim.`;
+                statusAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Berhasil!</strong> Data dan seluruh berkas Tryout telah terkirim dan tersimpan.`;
                 statusAlert.style.display = "flex";
-                
+
                 document.getElementById("tryoutForm").reset();
                 document.getElementById("statusSoal").innerText = "Belum ada file dipilih";
                 document.getElementById("statusHasil").innerText = "Belum ada file dipilih";
@@ -609,7 +629,7 @@
 
             } catch (err) {
                 statusAlert.className = "status-alert status-error";
-                statusAlert.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Gagal:</strong> Terjadi kendala saat mengirim berkas. Silakan coba lagi.`;
+                statusAlert.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Gagal:</strong> Terjadi kendala saat mengirim. Coba periksa koneksi.`;
                 statusAlert.style.display = "flex";
             } finally {
                 submitBtn.disabled = false;
