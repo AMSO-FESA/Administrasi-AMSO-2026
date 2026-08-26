@@ -208,14 +208,26 @@
             text-align: center;
         }
 
-        /* UPLOAD FORM */
-        .upload-form { display: flex; flex-direction: column; gap: 22px; }
-        .form-group { display: flex; flex-direction: column; gap: 8px; }
-        .form-group label { font-size: 0.9rem; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 8px; }
+        /* UPLOAD FORM (SEMUA CENTER) */
+        .upload-form { display: flex; flex-direction: column; gap: 24px; }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
 
-        /* CENTER FORM GROUP (NAMA SEKOLAH) */
-        .form-group-center label {
+        .form-group label {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            gap: 8px;
             text-align: center;
         }
 
@@ -259,16 +271,21 @@
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.35);
         }
 
+        /* HELPER CARD (CENTERED) */
         .helper-card {
+            width: 100%;
             background: rgba(15, 21, 42, 0.9);
             border: 1px solid rgba(255, 215, 0, 0.3);
-            border-left: 4px solid var(--gold);
-            border-radius: 10px;
-            padding: 12px 14px;
-            margin-bottom: 6px;
+            border-radius: 12px;
+            padding: 14px 18px;
             font-size: 0.85rem;
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .helper-card a {
@@ -277,22 +294,45 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            margin-bottom: 4px;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 6px;
         }
 
         .helper-card a:hover { text-decoration: underline; }
-        .helper-card ul { margin-left: 18px; margin-top: 5px; color: #cbd5e1; }
+        
+        .helper-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            align-items: center;
+        }
 
+        .helper-card ul li::before {
+            content: "• ";
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* FILE UPLOAD BOX (CENTERED) */
         .file-upload-box {
+            width: 100%;
             border: 2px dashed rgba(0, 210, 255, 0.35);
             background: rgba(15, 21, 42, 0.6);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 14px;
+            padding: 22px 18px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .file-upload-box:hover {
@@ -300,8 +340,8 @@
             background: rgba(157, 78, 221, 0.08);
         }
 
-        .file-upload-box i { font-size: 2rem; color: var(--neon-blue); margin-bottom: 8px; display: block; }
-        .file-upload-box span { font-size: 0.85rem; color: var(--text-muted); display: block; }
+        .file-upload-box i { font-size: 2.2rem; color: var(--neon-blue); margin-bottom: 8px; display: block; }
+        .file-upload-box span { font-size: 0.85rem; color: var(--text-muted); display: block; text-align: center; }
 
         .file-upload-box input[type="file"] {
             position: absolute;
@@ -315,6 +355,7 @@
             margin-top: 8px;
             font-weight: 600;
             word-break: break-all;
+            text-align: center;
         }
 
         /* MINIMALIST PROGRESS BAR */
@@ -322,7 +363,7 @@
             display: none;
             flex-direction: column;
             gap: 10px;
-            margin-top: 15px;
+            width: 100%;
             background: rgba(11, 16, 35, 0.7);
             border: 1px solid rgba(0, 210, 255, 0.25);
             padding: 16px 20px;
@@ -332,12 +373,13 @@
 
         .progress-header {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--neon-blue);
             font-weight: 800;
             letter-spacing: 1px;
+            text-align: center;
         }
 
         .progress-track {
@@ -362,7 +404,7 @@
             background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
             color: #ffffff;
             border: none;
-            padding: 15px 26px;
+            padding: 15px 32px;
             border-radius: 30px;
             font-weight: 800;
             font-size: 1rem;
@@ -374,7 +416,7 @@
             justify-content: center;
             gap: 10px;
             transition: all 0.3s ease;
-            margin-top: 10px;
+            margin: 10px auto 0;
             box-shadow: 0 4px 20px rgba(0, 210, 255, 0.35);
         }
 
@@ -387,12 +429,15 @@
 
         .status-alert {
             display: none;
+            width: 100%;
             padding: 14px 18px;
             border-radius: 12px;
             font-size: 0.9rem;
             font-weight: 600;
             margin-top: 10px;
             align-items: center;
+            justify-content: center;
+            text-align: center;
             gap: 10px;
         }
 
@@ -474,8 +519,8 @@
                 
                 <form id="tryoutForm" class="upload-form">
                     
-                    <!-- 1. NAMA SEKOLAH (CENTERED) -->
-                    <div class="form-group form-group-center">
+                    <!-- 1. NAMA SEKOLAH -->
+                    <div class="form-group">
                         <label for="schoolName"><i class="fa-solid fa-school"></i> NAMA SEKOLAH <span style="color: #ff4d4f;">*</span></label>
                         <select id="schoolName" class="form-control select-centered" required>
                             <option value="" disabled selected>-- Pilih Nama Sekolah --</option>
@@ -574,8 +619,8 @@
                     <!-- 4. DOKUMENTASI -->
                     <div class="form-group">
                         <label><i class="fa-solid fa-camera"></i> DOKUMENTASI PELAKSANAAN (FOTO) <span style="color: #ff4d4f;">*</span></label>
-                        <div class="helper-card" style="border-left-color: var(--neon-purple);">
-                            <span><i class="fa-solid fa-circle-info"></i> Upload 1 foto pelaksanaan Tryout.</span>
+                        <div class="helper-card" style="border-color: rgba(157, 78, 221, 0.4);">
+                            <span><i class="fa-solid fa-circle-info" style="color: var(--neon-purple);"></i> Upload 1 foto pelaksanaan Tryout.</span>
                         </div>
                         <div class="file-upload-box">
                             <i class="fa-solid fa-image" style="color: #ec4899;"></i>
@@ -610,7 +655,7 @@
         <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
 
-    <!-- SCRIPT PENGIRIMAN DATA DENGAN PROGRESS INDIKATOR -->
+    <!-- SCRIPT PENGIRIMAN DATA -->
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwVLjDXQnRf49xqBXet0eCimO0tcNZ_kEDMl3WD-7h7nLqxzAE2-NRvcqPIadYN-QdpKg/exec";
 
