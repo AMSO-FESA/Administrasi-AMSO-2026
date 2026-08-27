@@ -281,6 +281,7 @@
             font-size: 0.85rem;
             transition: all 0.3s ease;
             align-self: flex-start;
+            cursor: pointer;
         }
 
         .btn-form:hover {
@@ -288,6 +289,92 @@
             color: #ffffff;
             border-color: transparent;
             box-shadow: 0 0 18px rgba(157, 78, 221, 0.6);
+        }
+
+        /* CUSTOM GLOW MODAL POPUP */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 5, 10, 0.82);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: rgba(15, 21, 42, 0.95);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            border-radius: 24px;
+            padding: 35px 30px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.25);
+            transform: scale(0.85);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            font-size: 3.2rem;
+            color: var(--gold);
+            margin-bottom: 18px;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+            animation: pulseIcon 2s infinite alternate;
+        }
+
+        @keyframes pulseIcon {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.35rem;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .modal-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .btn-modal-close {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-modal-close:hover {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+            transform: translateY(-2px);
         }
 
         footer {
@@ -382,23 +469,23 @@
                 <div class="section-title"><i class="fa-solid fa-cloud-arrow-up"></i> UPLOAD DATA</div>
                 
                 <div class="letters-grid">
-                    <!-- KARTU FORM 1: HASIL TRYOUT -->
+                    <!-- KARTU FORM 1: HASIL TRYOUT (DIBUKA) -->
                     <div class="letter-card form-card">
                         <div class="letter-info">
                             <h3>Form Hasil Tryout AMSO 2026</h3>
-                         </div>
+                        </div>
                         <a href="form-tryout.html" class="btn-form">
                             <i class="fa-solid fa-file-circle-plus"></i> HasilTryoutAMSO2026 <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; margin-left: 2px;"></i>
                         </a>
                     </div>
 
-                    <!-- KARTU FORM 2: HASIL BABAK SELEKSI -->
+                    <!-- KARTU FORM 2: HASIL BABAK SELEKSI (LOCKED / BELUM TERSEDIA) -->
                     <div class="letter-card form-card">
                         <div class="letter-info">
                             <h3>Form Hasil Babak Seleksi AMSO 2026</h3>
                         </div>
-                        <a href="form-hasilbabakseleksiamso2026.html" class="btn-form">
-                            <i class="fa-solid fa-file-circle-check"></i> HasilBabakSeleksiAMSO2026 <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; margin-left: 2px;"></i>
+                        <a href="form-hasilbabakseleksiamso2026.html" class="btn-form" onclick="handleSeleksiClick(event)">
+                            <i class="fa-solid fa-lock" id="iconLock"></i> HasilBabakSeleksiAMSO2026 <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; margin-left: 2px;"></i>
                         </a>
                     </div>
                 </div>
@@ -407,10 +494,47 @@
         </div>
     </main>
 
+    <!-- CUSTOM POPUP MODAL -->
+    <div id="statusModal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal-card">
+            <div class="modal-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+            <h2 class="modal-title">Belum Tersedia</h2>
+            <p class="modal-desc">Formulir <strong>Hasil Babak Seleksi AMSO 2026</strong> saat ini belum dibuka. Silakan cek kembali sesuai jadwal yang telah ditentukan.</p>
+            <button class="btn-modal-close" onclick="closeModal()">Mengerti</button>
+        </div>
+    </div>
+
     <footer>
         <strong>AMSO 2026</strong>
         <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
+
+    <!-- LOGIKA KUNCI FORM SELEKSI -->
+    <script>
+        // Set ke 'true' bila nanti form babak seleksi sudah resmi dibuka
+        const isSeleksiOpen = false;
+
+        function handleSeleksiClick(event) {
+            if (!isSeleksiOpen) {
+                event.preventDefault(); // Batalkan redirect halaman
+                openModal();
+            }
+        }
+
+        function openModal() {
+            document.getElementById("statusModal").classList.add("active");
+        }
+
+        function closeModal() {
+            document.getElementById("statusModal").classList.remove("active");
+        }
+
+        function closeModalOnOverlay(event) {
+            if (event.target === document.getElementById("statusModal")) {
+                closeModal();
+            }
+        }
+    </script>
 
 </body>
 </html>
