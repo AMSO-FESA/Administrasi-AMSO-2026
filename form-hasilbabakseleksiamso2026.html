@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMSO 2026</title>
+    <title>Hasil Babak Seleksi AMSO 2026</title>
 
     <!-- FAVICON (LOGO TAB BROWSER) -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/AMSO-FESA/AMSO-2026/main/amso.png">
 
-    <!-- CSS / Fonts lainnya ... -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasil Babak Seleksi AMSO 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
@@ -247,7 +243,7 @@
             letter-spacing: 1px;
         }
 
-        /* UPLOAD FORM (SEMUA CENTER) */
+        /* UPLOAD FORM */
         .upload-form { display: flex; flex-direction: column; gap: 24px; }
         
         .form-group {
@@ -310,7 +306,7 @@
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.35);
         }
 
-        /* HELPER CARD (CENTERED) */
+        /* HELPER CARD */
         .helper-card {
             width: 100%;
             background: rgba(15, 21, 42, 0.9);
@@ -357,7 +353,7 @@
             font-weight: bold;
         }
 
-        /* FILE UPLOAD BOX (CENTERED) */
+        /* FILE UPLOAD BOX */
         .file-upload-box {
             width: 100%;
             border: 2px dashed rgba(0, 210, 255, 0.35);
@@ -492,6 +488,80 @@
             color: #f87171;
         }
 
+        /* ─── HARD LOCK OVERLAY (JIKA LINK DITEMBUS LANGSUNG) ─── */
+        .lock-gatekeeper {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 7, 17, 0.95);
+            backdrop-filter: blur(18px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 20px;
+        }
+
+        .lock-card {
+            background: rgba(15, 21, 42, 0.98);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+        }
+
+        .lock-card .icon-hour {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            animation: pulseIcon 2s infinite alternate;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+        }
+
+        @keyframes pulseIcon {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .lock-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .lock-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn-gate-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #fff;
+            border: none;
+            padding: 13px 28px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-gate-back:hover {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
         footer {
             background: #050811; color: white; padding: 35px 20px;
             text-align: center; border-top: 1px solid var(--border); width: 100%;
@@ -501,6 +571,18 @@
     </style>
 </head>
 <body>
+
+    <!-- OVERLAY GERBANG KUNCI LANGSUNG (DEFAULT: AKTIF) -->
+    <div id="gatekeeperLock" class="lock-gatekeeper">
+        <div class="lock-card">
+            <div class="icon-hour"><i class="fa-solid fa-hourglass-half"></i></div>
+            <h2>Belum Tersedia</h2>
+            <p>Formulir <strong>Hasil Babak Seleksi AMSO 2026</strong> saat ini belum dibuka untuk pengunggahan berkas. Silakan kembali sesuai jadwal yang telah ditentukan.</p>
+            <a href="index.html" class="btn-gate-back">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Administrasi
+            </a>
+        </div>
+    </div>
 
     <!-- LATAR BELAKANG SAINS, MATEMATIKA & ANTARIKSA -->
     <div class="space-bg">
@@ -539,16 +621,16 @@
             </div>
 
             <nav>
-                <a href="https://amso-fesa.github.io/AMSO-2026/"><i class="fa-solid fa-house"></i> Beranda</a>
-                <a href="https://amso-fesa.github.io/Timeline-AMSO-2026/"><i class="fa-solid fa-calendar-days"></i> Timeline</a>
+                <a href="https://amso.web.id/"><i class="fa-solid fa-house"></i> Beranda</a>
+                <a href="https://timeline.amso.web.id/"><i class="fa-solid fa-calendar-days"></i> Timeline</a>
                 <a href="https://amso-fesa.github.io/Kategori-AMSO-2026/"><i class="fa-solid fa-layer-group"></i> Kategori</a>
-                <a href="https://amso-fesa.github.io/BukuPanduan-AMSO-2026/"><i class="fa-solid fa-clipboard-check"></i> Buku Panduan</a>
+                <a href="https://bukupanduan.amso.web.id/"><i class="fa-solid fa-clipboard-check"></i> Buku Panduan</a>
                 
                 <div class="dropdown">
                     <a href="#" class="active"><i class="fa-solid fa-folder-open"></i> Data <i class="fa-solid fa-angle-down" style="font-size: 10px; margin-left: 2px;"></i></a>
                     <div class="dropdown-content">
-                        <a href="https://amso-fesa.github.io/Data-Peserta-AMSO-2026/"><i class="fa-solid fa-users" style="margin-right: 6px;"></i> Data Peserta</a>
-                        <a href="https://amso-fesa.github.io/Administrasi-AMSO-2026/" class="active"><i class="fa-solid fa-envelope-open-text" style="margin-right: 6px;"></i> Administrasi</a>
+                        <a href="https://peserta.amso.web.id/"><i class="fa-solid fa-users" style="margin-right: 6px;"></i> Data Peserta</a>
+                        <a href="https://administrasi.amso.web.id/" class="active"><i class="fa-solid fa-envelope-open-text" style="margin-right: 6px;"></i> Administrasi</a>
                     </div>
                 </div>
 
@@ -559,8 +641,8 @@
         </header>
     </div>
 
-    <!-- MAIN CONTENT FORM -->
-    <main class="container">
+    <!-- MAIN CONTENT FORM (HANYA DITAMPILKAN JIKA DIIZINKAN) -->
+    <main class="container" id="formMainContent" style="display: none;">
         <div class="form-wrapper">
             
             <a href="index.html" class="btn-back">
@@ -715,8 +797,20 @@
         <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
 
-    <!-- SCRIPT PENGIRIMAN DATA SELEKSI -->
+    <!-- SCRIPT PROTEKSI AKSES & PENGIRIMAN DATA -->
     <script>
+        // STATUS FORM: GANTI 'true' BILA FORM SUDAH RESMI DIBUKA
+        const isFormActive = false;
+
+        // PROTEKSI AKSES OTOMATIS
+        if (!isFormActive) {
+            document.getElementById("gatekeeperLock").style.display = "flex";
+            document.getElementById("formMainContent").style.display = "none";
+        } else {
+            document.getElementById("gatekeeperLock").style.display = "none";
+            document.getElementById("formMainContent").style.display = "block";
+        }
+
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8MlorFyNGBxhbItHkMcZ0-aFmb9XknbHFM5DOUB2eEVeA16IdxjDYFQD7CHKpVbIc/exec";
 
         const filesData = { ba: null, nilai: null, dok: null };
@@ -842,7 +936,7 @@
                 statusAlert.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <strong>Gagal:</strong> Terjadi kendala koneksi saat mengirim.`;
                 statusAlert.style.display = "flex";
             } finally {
-                submitBtn.disabled = true;
+                submitBtn.disabled = false;
                 submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> KIRIM HASIL SELEKSI`;
             }
         });
