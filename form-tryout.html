@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMSO 2026</title>
-
-    <!-- FAVICON (LOGO TAB BROWSER) -->
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/AMSO-FESA/AMSO-2026/main/amso.png">
-
-    <!-- CSS / Fonts lainnya ... -->
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Hasil Tryout - AMSO 2026</title>
+
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/AMSO-FESA/AMSO-2026/main/amso.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
@@ -89,19 +84,16 @@
             z-index: 0;
         }
 
-        /* Posisi Sisi Kiri */
         .el-astronaut { top: 18%; left: 5%; font-size: 2.8rem; color: var(--gold); animation: floatItem1 9s infinite alternate ease-in-out; }
         .el-atom { top: 38%; left: 6%; font-size: 2.4rem; color: var(--neon-blue); animation: rotateAtom 14s infinite linear; }
         .el-dna { top: 58%; left: 4%; font-size: 2.2rem; color: #00f0ff; animation: floatItem2 11s infinite alternate ease-in-out; }
         .el-math-pi { top: 78%; left: 7%; font-size: 2.3rem; font-family: 'Orbitron', sans-serif; color: var(--neon-purple); animation: floatItem1 8s infinite alternate ease-in-out; font-weight: 900; }
 
-        /* Posisi Sisi Kanan */
         .el-rocket { top: 15%; right: 6%; font-size: 3rem; color: var(--neon-blue); animation: flyRocket 13s infinite ease-in-out; }
         .el-microscope { top: 36%; right: 5%; font-size: 2.3rem; color: var(--neon-purple); animation: floatItem2 10s infinite alternate ease-in-out; }
         .el-planet { top: 56%; right: 7%; font-size: 2.6rem; color: var(--gold); animation: rotatePlanet 18s infinite linear; }
         .el-math-sigma { top: 76%; right: 6%; font-size: 2.4rem; font-family: 'Orbitron', sans-serif; color: var(--neon-blue); animation: floatItem1 9s infinite alternate ease-in-out; font-weight: 900; }
 
-        /* Posisi Melayang Tambahan */
         .el-satellite { top: 6%; left: 35%; font-size: 2rem; color: var(--text-muted); animation: flySatellite 20s infinite linear; }
         .el-flask { bottom: 8%; left: 18%; font-size: 2.1rem; color: #ff007f; animation: floatItem2 9s infinite alternate ease-in-out; }
         .el-math-root { bottom: 10%; right: 20%; font-size: 2.2rem; font-family: 'Orbitron', sans-serif; color: var(--gold); animation: floatItem1 7s infinite alternate ease-in-out; font-weight: 900; }
@@ -112,31 +104,11 @@
             100% { transform: translate(0, 0) rotate(45deg); }
         }
 
-        @keyframes floatItem1 {
-            0% { transform: translateY(0) rotate(-10deg); }
-            100% { transform: translateY(-40px) rotate(15deg); }
-        }
-
-        @keyframes floatItem2 {
-            0% { transform: translateY(0) rotate(10deg); }
-            100% { transform: translateY(35px) rotate(-15deg); }
-        }
-
-        @keyframes rotateAtom {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
-
-        @keyframes rotatePlanet {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes flySatellite {
-            0% { transform: translateX(-40vw) translateY(0) rotate(0deg); }
-            100% { transform: translateX(100vw) translateY(-25px) rotate(360deg); }
-        }
+        @keyframes floatItem1 { 0% { transform: translateY(0) rotate(-10deg); } 100% { transform: translateY(-40px) rotate(15deg); } }
+        @keyframes floatItem2 { 0% { transform: translateY(0) rotate(10deg); } 100% { transform: translateY(35px) rotate(-15deg); } }
+        @keyframes rotateAtom { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.1); } 100% { transform: rotate(360deg) scale(1); } }
+        @keyframes rotatePlanet { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes flySatellite { 0% { transform: translateX(-40vw) translateY(0) rotate(0deg); } 100% { transform: translateX(100vw) translateY(-25px) rotate(360deg); } }
 
         .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; width: 100%; }
 
@@ -503,16 +475,101 @@
             gap: 10px;
         }
 
-        .status-success {
-            background: rgba(34, 197, 94, 0.15);
-            border: 1px solid rgba(34, 197, 94, 0.4);
-            color: #4ade80;
-        }
-
         .status-error {
             background: rgba(239, 68, 68, 0.15);
             border: 1px solid rgba(239, 68, 68, 0.4);
             color: #f87171;
+        }
+
+        /* ================= POPUP MODAL SUKSES ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 5, 10, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: rgba(15, 21, 42, 0.98);
+            border: 1px solid rgba(0, 210, 255, 0.5);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0, 210, 255, 0.3);
+            transform: scale(0.85);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-icon-success {
+            font-size: 3.6rem;
+            color: #4ade80;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 0 15px rgba(74, 222, 128, 0.6));
+            animation: pulseSuccess 2s infinite alternate;
+        }
+
+        @keyframes pulseSuccess {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.35rem;
+            color: #fff;
+            margin-bottom: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .modal-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 26px;
+        }
+
+        .btn-modal-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #fff;
+            border: none;
+            padding: 13px 30px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 18px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-modal-back:hover {
+            box-shadow: 0 0 28px rgba(0, 210, 255, 0.8);
+            transform: translateY(-2px);
         }
 
         footer {
@@ -525,26 +582,22 @@
 </head>
 <body>
 
-    <!-- LATAR BELAKANG SAINS, MATEMATIKA & ANTARIKSA -->
     <div class="space-bg">
         <div class="stars"></div>
         <div class="galaxy-blob blob-1"></div>
         <div class="galaxy-blob blob-2"></div>
         <div class="galaxy-blob blob-3"></div>
 
-        <!-- IKON SISI KIRI -->
         <div class="floating-icon el-astronaut" title="Astronot"><i class="fa-solid fa-user-astronaut"></i></div>
         <div class="floating-icon el-atom" title="Fisika Kuantum/Atom"><i class="fa-solid fa-atom"></i></div>
         <div class="floating-icon el-dna" title="Biologi Kuantum"><i class="fa-solid fa-dna"></i></div>
         <div class="floating-icon el-math-pi" title="Pi">&pi;</div>
 
-        <!-- IKON SISI KANAN -->
         <div class="floating-icon el-rocket" title="Roket Luar Angkasa"><i class="fa-solid fa-rocket"></i></div>
         <div class="floating-icon el-microscope" title="Sains & Eksperimen"><i class="fa-solid fa-microscope"></i></div>
         <div class="floating-icon el-planet" title="Planet Orbit"><i class="fa-solid fa-earth-americas"></i></div>
         <div class="floating-icon el-math-sigma" title="Sigma">&sum;</div>
 
-        <!-- IKON LATAR TAMBAHAN -->
         <div class="floating-icon el-satellite" title="Satelit Orbit"><i class="fa-solid fa-satellite"></i></div>
         <div class="floating-icon el-flask" title="Laboratorium Kimia"><i class="fa-solid fa-flask-vial"></i></div>
         <div class="floating-icon el-math-root" title="Akar Kuadrat">&radic;</div>
@@ -565,16 +618,16 @@
             </div>
 
             <nav>
-                <a href="https://amso-fesa.github.io/AMSO-2026/"><i class="fa-solid fa-house"></i> Beranda</a>
-                <a href="https://amso-fesa.github.io/Timeline-AMSO-2026/"><i class="fa-solid fa-calendar-days"></i> Timeline</a>
+                <a href="https://amso.web.id/"><i class="fa-solid fa-house"></i> Beranda</a>
+                <a href="https://timeline.amso.web.id/"><i class="fa-solid fa-calendar-days"></i> Timeline</a>
                 <a href="https://amso-fesa.github.io/Kategori-AMSO-2026/"><i class="fa-solid fa-layer-group"></i> Kategori</a>
-                <a href="https://amso-fesa.github.io/BukuPanduan-AMSO-2026/"><i class="fa-solid fa-clipboard-check"></i> Buku Panduan</a>
+                <a href="https://bukupanduan.amso.web.id/"><i class="fa-solid fa-clipboard-check"></i> Buku Panduan</a>
                 
                 <div class="dropdown">
                     <a href="#" class="active"><i class="fa-solid fa-folder-open"></i> Data <i class="fa-solid fa-angle-down" style="font-size: 10px; margin-left: 2px;"></i></a>
                     <div class="dropdown-content">
-                        <a href="https://amso-fesa.github.io/Data-Peserta-AMSO-2026/"><i class="fa-solid fa-users" style="margin-right: 6px;"></i> Data Peserta</a>
-                        <a href="https://amso-fesa.github.io/Administrasi-AMSO-2026/" class="active"><i class="fa-solid fa-envelope-open-text" style="margin-right: 6px;"></i> Administrasi</a>
+                        <a href="https://peserta.amso.web.id/"><i class="fa-solid fa-users" style="margin-right: 6px;"></i> Data Peserta</a>
+                        <a href="https://administrasi.amso.web.id/" class="active"><i class="fa-solid fa-envelope-open-text" style="margin-right: 6px;"></i> Administrasi</a>
                     </div>
                 </div>
 
@@ -585,7 +638,6 @@
         </header>
     </div>
 
-    <!-- MAIN CONTENT FORM -->
     <main class="container">
         <div class="form-wrapper">
             
@@ -598,7 +650,6 @@
                 
                 <form id="tryoutForm" class="upload-form">
                     
-                    <!-- 1. NAMA SEKOLAH -->
                     <div class="form-group">
                         <label for="schoolName"><i class="fa-solid fa-school"></i> NAMA SEKOLAH <span style="color: #ff4d4f;">*</span></label>
                         <select id="schoolName" class="form-control select-centered" required>
@@ -662,7 +713,6 @@
                         </select>
                     </div>
 
-                    <!-- 2. SOAL TRYOUT -->
                     <div class="form-group">
                         <label><i class="fa-solid fa-file-lines"></i> SOAL TRYOUT (DOC / PDF) <span style="color: #ff4d4f;">*</span></label>
                         <div class="file-upload-box">
@@ -673,7 +723,6 @@
                         </div>
                     </div>
 
-                    <!-- 3. HASIL TRYOUT -->
                     <div class="form-group">
                         <label><i class="fa-solid fa-file-excel"></i> HASIL TRYOUT (EXCEL) <span style="color: #ff4d4f;">*</span></label>
                         
@@ -695,7 +744,6 @@
                         </div>
                     </div>
 
-                    <!-- 4. DOKUMENTASI -->
                     <div class="form-group">
                         <label><i class="fa-solid fa-camera"></i> DOKUMENTASI PELAKSANAAN (FOTO) <span style="color: #ff4d4f;">*</span></label>
                         <div class="helper-card" style="border-color: rgba(157, 78, 221, 0.4);">
@@ -709,7 +757,6 @@
                         </div>
                     </div>
 
-                    <!-- MINIMALIST PROGRESS BAR -->
                     <div id="progressBox" class="progress-box">
                         <div class="progress-header">
                             <span id="progressPercent">0%</span>
@@ -729,12 +776,26 @@
         </div>
     </main>
 
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-icon-success">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2 class="modal-title">PENGIRIMAN BERHASIL!</h2>
+            <p class="modal-desc">
+                Terima kasih! Data dan seluruh berkas <strong>Hasil Tryout AMSO 2026</strong> telah berhasil dikirim dan tersimpan di sistem.
+            </p>
+            <a href="index.html" class="btn-modal-back">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Administrasi
+            </a>
+        </div>
+    </div>
+
     <footer>
         <strong>AMSO 2026</strong>
         <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
 
-    <!-- SCRIPT PENGIRIMAN DATA -->
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwVLjDXQnRf49xqBXet0eCimO0tcNZ_kEDMl3WD-7h7nLqxzAE2-NRvcqPIadYN-QdpKg/exec";
 
@@ -840,10 +901,11 @@
 
                 setTimeout(() => {
                     progressBox.style.display = "none";
-                    statusAlert.className = "status-alert status-success";
-                    statusAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Berhasil!</strong> Data dan seluruh berkas Tryout telah terkirim dan tersimpan.`;
-                    statusAlert.style.display = "flex";
+                    
+                    // MUNCULKAN POPUP MODAL KEBERHASILAN
+                    document.getElementById("successModal").classList.add("active");
 
+                    // Reset Form
                     document.getElementById("tryoutForm").reset();
                     document.getElementById("statusSoal").innerText = "Belum ada file dipilih";
                     document.getElementById("statusHasil").innerText = "Belum ada file dipilih";
