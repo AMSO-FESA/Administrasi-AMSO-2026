@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrasi AMSO 2026</title>
 
+    <!-- FAVICON (LOGO TAB BROWSER) -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/AMSO-FESA/AMSO-2026/main/amso.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -205,63 +206,8 @@
             gap: 10px;
         }
 
-        .letters-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
-
-        .letter-card {
-            background: rgba(15, 21, 42, 0.8);
-            border: 1px solid var(--card-border);
-            border-radius: 15px;
-            padding: 20px 22px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .letter-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-        }
-
-        .letter-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--neon-blue);
-            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.2);
-        }
-
-        .letter-info h3 { font-size: 1.05rem; color: #fff; margin-bottom: 6px; font-weight: 700; }
-        .letter-info p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
-
-        .btn-drive {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, rgba(0, 210, 255, 0.15), rgba(157, 78, 221, 0.15));
-            color: var(--neon-blue);
-            border: 1px solid rgba(0, 210, 255, 0.4);
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            align-self: flex-start;
-        }
-
-        .btn-drive:hover {
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-            color: #ffffff;
-            border-color: transparent;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
-        }
-
-        /* ACCORDION DROPDOWN UPLOAD DATA */
-        .upload-accordion {
+        /* ─── ACCORDION DROPDOWN STYLES (DAFTAR SURAT & UPLOAD DATA) ─── */
+        .admin-accordion {
             background: rgba(15, 21, 42, 0.85);
             border: 1px solid var(--card-border);
             border-radius: 16px;
@@ -270,8 +216,8 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .upload-accordion:hover {
-            border-color: rgba(157, 78, 221, 0.5);
+        .admin-accordion:hover {
+            border-color: rgba(0, 210, 255, 0.5);
         }
 
         .accordion-header {
@@ -313,23 +259,24 @@
             transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .upload-accordion.open .accordion-arrow {
+        .admin-accordion.open .accordion-arrow {
             transform: rotate(180deg);
         }
 
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease-out;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             background: rgba(10, 14, 30, 0.65);
         }
 
-        .upload-accordion.open .accordion-content {
+        .admin-accordion.open .accordion-content {
             max-height: 270px;
             overflow-y: auto;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
+        /* CUSTOM SCROLLBAR UNTUK ACCORDION */
         .accordion-content::-webkit-scrollbar {
             width: 5px;
         }
@@ -408,6 +355,19 @@
             background: linear-gradient(135deg, var(--neon-purple), #7b2cbf);
             color: #fff;
             box-shadow: 0 0 10px rgba(157, 78, 221, 0.4);
+        }
+
+        .tag-drive {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(157, 78, 221, 0.2));
+            color: var(--neon-blue);
+            border: 1px solid rgba(0, 210, 255, 0.4);
+        }
+
+        .dropdown-item-card:hover .tag-drive {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.5);
         }
 
         .tag-locked {
@@ -568,30 +528,47 @@
         </header>
     </div>
 
+    <!-- MAIN CONTENT -->
     <main class="container">
         <div class="admin-layout">
             
+            <!-- KOLOM KIRI: DAFTAR SURAT (DROPDOWN DENGAN AUTO-CLOSE ON MOUSELEAVE) -->
             <div class="section-box">
                 <div class="section-title"><i class="fa-solid fa-folder-open"></i> DAFTAR SURAT</div>
                 
-                <div class="letters-grid">
-                    <div class="letter-card">
-                        <div class="letter-info">
-                            <h3>Surat Edaran Pelaksanaan Tryout AMSO 2026</h3>
-                            <p>Surat pemberitahuan resmi terkait pelaksanaan Tryout.</p>
+                <div class="admin-accordion" id="suratAccordion" onmouseleave="closeAccordion('suratAccordion')">
+                    <div class="accordion-header" onclick="toggleAccordion('suratAccordion')">
+                        <div class="accordion-title-wrap">
+                            <i class="fa-solid fa-envelope-circle-check"></i>
+                            <span>Pilih Surat Edaran</span>
                         </div>
-                        <a href="https://drive.google.com/file/d/1ezADrPdOI9LZpC3yMRYKXPEPF0VDEp0l/view?usp=drive_link" target="_blank" class="btn-drive">
-                            <i class="fa-brands fa-google-drive"></i> SuratTryoutAMSO2026 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-                        </a>
+                        <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+                    </div>
+
+                    <div class="accordion-content">
+                        <div class="dropdown-items-list">
+                            <!-- SURAT 1: TRYOUT -->
+                            <a href="https://drive.google.com/file/d/1ezADrPdOI9LZpC3yMRYKXPEPF0VDEp0l/view?usp=drive_link" target="_blank" class="dropdown-item-card">
+                                <div class="item-text">
+                                    <strong>Surat Edaran Pelaksanaan Tryout AMSO 2026</strong>
+                                    <small>Pemberitahuan resmi pelaksanaan Tryout AMSO</small>
+                                </div>
+                                <span class="item-btn-tag tag-drive">
+                                    <i class="fa-brands fa-google-drive"></i> Unduh Surat <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; margin-left: 2px;"></i>
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
+            <!-- KOLOM KANAN: UPLOAD DATA (DROPDOWN DENGAN AUTO-CLOSE ON MOUSELEAVE) -->
             <div class="section-box">
                 <div class="section-title"><i class="fa-solid fa-cloud-arrow-up"></i> UPLOAD DATA</div>
                 
-                <div class="upload-accordion" id="uploadAccordion">
-                    <div class="accordion-header" onclick="toggleAccordion()">
+                <div class="admin-accordion" id="uploadAccordion" onmouseleave="closeAccordion('uploadAccordion')">
+                    <div class="accordion-header" onclick="toggleAccordion('uploadAccordion')">
                         <div class="accordion-title-wrap">
                             <i class="fa-solid fa-folder-closed"></i>
                             <span>Pilih Formulir Pengumpulan</span>
@@ -602,6 +579,7 @@
                     <div class="accordion-content">
                         <div class="dropdown-items-list">
                             
+                            <!-- ITEM 1: TRYOUT -->
                             <a href="form-tryout.html" class="dropdown-item-card">
                                 <div class="item-text">
                                     <strong>Form Hasil Tryout AMSO 2026</strong>
@@ -612,13 +590,15 @@
                                 </span>
                             </a>
 
+                            <!-- ITEM 2: BABAK SELEKSI -->
                             <a href="form-hasilbabakseleksiamso2026.html" id="linkCardSeleksi" class="dropdown-item-card" onclick="handleSeleksiClick(event)">
                                 <div class="item-text">
                                     <strong>Form Hasil Babak Seleksi AMSO 2026</strong>
                                     <small>Berita Acara, Nilai, & Dokumentasi</small>
                                 </div>
                                 <span id="tagBtnSeleksi" class="item-btn-tag">
-                                    </span>
+                                    <!-- Diatur otomatis oleh JavaScript -->
+                                </span>
                             </a>
 
                         </div>
@@ -630,6 +610,7 @@
         </div>
     </main>
 
+    <!-- CUSTOM POPUP MODAL -->
     <div id="statusModal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
         <div class="modal-card">
             <div class="modal-icon"><i class="fa-solid fa-hourglass-half"></i></div>
@@ -644,11 +625,12 @@
         <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
 
+    <!-- LOGIKA ACCORDION, AUTO-CLOSE & AUTO SWITCH TOMBOL SELEKSI -->
     <script>
         // SAKELAR STATUS: 'true' untuk buka, 'false' untuk kunci
-        const isSeleksiOpen = true; 
+        const isSeleksiOpen = false; 
 
-        // Fungsi Auto-Update Tampilan Tombol
+        // Update tampilan tombol seleksi
         function updateSeleksiButtonState() {
             const linkCard = document.getElementById("linkCardSeleksi");
             const tagBtn = document.getElementById("tagBtnSeleksi");
@@ -673,10 +655,18 @@
             }
         }
 
-        // Toggle Accordion Dropdown
-        function toggleAccordion() {
-            const accordion = document.getElementById("uploadAccordion");
+        // Toggle buka / tutup accordion berdasarkan ID
+        function toggleAccordion(accordionId) {
+            const accordion = document.getElementById(accordionId);
             accordion.classList.toggle("open");
+        }
+
+        // Auto tutup jika kursor mouse keluar dari kotak
+        function closeAccordion(accordionId) {
+            const accordion = document.getElementById(accordionId);
+            if (accordion) {
+                accordion.classList.remove("open");
+            }
         }
 
         function openModal() {
