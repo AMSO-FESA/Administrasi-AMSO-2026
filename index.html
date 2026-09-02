@@ -326,12 +326,11 @@
         }
 
         .upload-accordion.open .accordion-content {
-            max-height: 270px; /* Batas tinggi scrollable */
+            max-height: 270px;
             overflow-y: auto;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        /* CUSTOM SCROLLBAR FOR DROPDOWN */
         .accordion-content::-webkit-scrollbar {
             width: 5px;
         }
@@ -370,12 +369,6 @@
             box-shadow: 0 4px 15px rgba(0, 210, 255, 0.15);
         }
 
-        .dropdown-item-card.locked:hover {
-            border-color: rgba(255, 215, 0, 0.5);
-            background: rgba(255, 215, 0, 0.06);
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
-        }
-
         .item-text {
             display: flex;
             flex-direction: column;
@@ -409,12 +402,6 @@
             background: linear-gradient(135deg, var(--neon-purple), #7b2cbf);
             color: #fff;
             box-shadow: 0 0 10px rgba(157, 78, 221, 0.4);
-        }
-
-        .tag-locked {
-            background: rgba(255, 215, 0, 0.15);
-            color: var(--gold);
-            border: 1px solid rgba(255, 215, 0, 0.4);
         }
 
         /* CUSTOM GLOW MODAL POPUP */
@@ -551,7 +538,7 @@
                 <a href="https://amso.web.id/"><i class="fa-solid fa-house"></i> Beranda</a>
                 <a href="https://timeline.amso.web.id/"><i class="fa-solid fa-calendar-days"></i> Timeline</a>
                 <a href="https://amso-fesa.github.io/Kategori-AMSO-2026/"><i class="fa-solid fa-layer-group"></i> Kategori</a>
-                <a href="https://amso-fesa.github.io/BukuPanduan-AMSO-2026/"><i class="fa-solid fa-clipboard-check"></i> Buku Panduan</a>
+                <a href="https://bukupanduan.amso.web.id/"><i class="fa-solid fa-clipboard-check"></i> Buku Panduan</a>
                 
                 <div class="dropdown">
                     <a href="#" class="active"><i class="fa-solid fa-folder-open"></i> Data <i class="fa-solid fa-angle-down" style="font-size: 10px; margin-left: 2px;"></i></a>
@@ -618,14 +605,14 @@
                                 </span>
                             </a>
 
-                            <!-- ITEM 2: BABAK SELEKSI (LOCKED) -->
-                            <a href="form-hasilbabakseleksiamso2026.html" class="dropdown-item-card locked" onclick="handleSeleksiClick(event)">
+                            <!-- ITEM 2: BABAK SELEKSI (SUDAH DIBUKA / ACTIVE) -->
+                            <a href="form-hasilbabakseleksiamso2026.html" class="dropdown-item-card" onclick="handleSeleksiClick(event)">
                                 <div class="item-text">
                                     <strong>Form Hasil Babak Seleksi AMSO 2026</strong>
                                     <small>Berita Acara, Nilai, & Dokumentasi</small>
                                 </div>
-                                <span class="item-btn-tag tag-locked">
-                                    <i class="fa-solid fa-lock"></i> Terkunci
+                                <span class="item-btn-tag tag-active">
+                                    <i class="fa-solid fa-file-circle-check"></i> Buka Form
                                 </span>
                             </a>
 
@@ -661,8 +648,8 @@
             accordion.classList.toggle("open");
         }
 
-        // Set ke 'true' bila nanti form babak seleksi sudah resmi dibuka
-        const isSeleksiOpen = false;
+        // FORM SUDAH DIBUKA (set true)
+        const isSeleksiOpen = true;
 
         function handleSeleksiClick(event) {
             if (!isSeleksiOpen) {
