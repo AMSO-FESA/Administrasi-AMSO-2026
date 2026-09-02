@@ -369,6 +369,12 @@
             box-shadow: 0 4px 15px rgba(0, 210, 255, 0.15);
         }
 
+        .dropdown-item-card.locked:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            background: rgba(255, 215, 0, 0.06);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
+        }
+
         .item-text {
             display: flex;
             flex-direction: column;
@@ -402,6 +408,12 @@
             background: linear-gradient(135deg, var(--neon-purple), #7b2cbf);
             color: #fff;
             box-shadow: 0 0 10px rgba(157, 78, 221, 0.4);
+        }
+
+        .tag-locked {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(255, 215, 0, 0.4);
         }
 
         /* CUSTOM GLOW MODAL POPUP */
@@ -605,14 +617,14 @@
                                 </span>
                             </a>
 
-                            <!-- ITEM 2: BABAK SELEKSI (SUDAH DIBUKA / ACTIVE) -->
-                            <a href="form-hasilbabakseleksiamso2026.html" class="dropdown-item-card" onclick="handleSeleksiClick(event)">
+                            <!-- ITEM 2: BABAK SELEKSI (LOCKED / TERKUNCI) -->
+                            <a href="form-hasilbabakseleksiamso2026.html" class="dropdown-item-card locked" onclick="handleSeleksiClick(event)">
                                 <div class="item-text">
                                     <strong>Form Hasil Babak Seleksi AMSO 2026</strong>
                                     <small>Berita Acara, Nilai, & Dokumentasi</small>
                                 </div>
-                                <span class="item-btn-tag tag-active">
-                                    <i class="fa-solid fa-file-circle-check"></i> Buka Form
+                                <span class="item-btn-tag tag-locked">
+                                    <i class="fa-solid fa-lock"></i> Terkunci
                                 </span>
                             </a>
 
@@ -648,12 +660,12 @@
             accordion.classList.toggle("open");
         }
 
-        // FORM SUDAH DIBUKA (set true)
-        const isSeleksiOpen = true;
+        // STATUS: TERKUNCI (false)
+        const isSeleksiOpen = false;
 
         function handleSeleksiClick(event) {
             if (!isSeleksiOpen) {
-                event.preventDefault(); // Batalkan redirect halaman
+                event.preventDefault(); // Batalkan redirect ke form
                 openModal();
             }
         }
