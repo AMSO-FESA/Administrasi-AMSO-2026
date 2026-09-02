@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hasil Babak Seleksi AMSO 2026</title>
 
-    <!-- FAVICON (LOGO TAB BROWSER) -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/AMSO-FESA/AMSO-2026/main/amso.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -562,6 +561,97 @@
             transform: translateY(-2px);
         }
 
+        /* ================= POPUP MODAL SUKSES ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 5, 10, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card-success {
+            background: rgba(15, 21, 42, 0.98);
+            border: 1px solid rgba(157, 78, 221, 0.5);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(157, 78, 221, 0.35);
+            transform: scale(0.85);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-card-success {
+            transform: scale(1);
+        }
+
+        .modal-icon-success {
+            font-size: 3.6rem;
+            color: #4ade80;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 0 15px rgba(74, 222, 128, 0.6));
+            animation: pulseSuccess 2s infinite alternate;
+        }
+
+        @keyframes pulseSuccess {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+
+        .modal-title-success {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.35rem;
+            color: #fff;
+            margin-bottom: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .modal-desc-success {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 26px;
+        }
+
+        .btn-modal-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--neon-purple), #7b2cbf);
+            color: #fff;
+            border: none;
+            padding: 13px 30px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 18px rgba(157, 78, 221, 0.5);
+        }
+
+        .btn-modal-back:hover {
+            box-shadow: 0 0 28px rgba(157, 78, 221, 0.8);
+            transform: translateY(-2px);
+        }
+
         footer {
             background: #050811; color: white; padding: 35px 20px;
             text-align: center; border-top: 1px solid var(--border); width: 100%;
@@ -572,7 +662,6 @@
 </head>
 <body>
 
-    <!-- OVERLAY GERBANG KUNCI LANGSUNG -->
     <div id="gatekeeperLock" class="lock-gatekeeper">
         <div class="lock-card">
             <div class="icon-hour"><i class="fa-solid fa-hourglass-half"></i></div>
@@ -584,7 +673,6 @@
         </div>
     </div>
 
-    <!-- LATAR BELAKANG SAINS, MATEMATIKA & ANTARIKSA -->
     <div class="space-bg">
         <div class="stars"></div>
         <div class="galaxy-blob blob-1"></div>
@@ -641,7 +729,6 @@
         </header>
     </div>
 
-    <!-- MAIN CONTENT FORM -->
     <main class="container" id="formMainContent">
         <div class="form-wrapper">
             
@@ -654,7 +741,6 @@
                 
                 <form id="seleksiForm" class="upload-form">
                     
-                    <!-- 1. NAMA SEKOLAH -->
                     <div class="form-group">
                         <label for="schoolName"><i class="fa-solid fa-school"></i> NAMA SEKOLAH <span style="color: #ff4d4f;">*</span></label>
                         <select id="schoolName" class="form-control select-centered" required>
@@ -718,7 +804,6 @@
                         </select>
                     </div>
 
-                    <!-- 2. BERITA ACARA DAN DAFTAR HADIR -->
                     <div class="form-group">
                         <label><i class="fa-solid fa-file-signature"></i> BERITA ACARA & DAFTAR HADIR BABAK SELEKSI <span style="color: #ff4d4f;">*</span></label>
                         
@@ -736,7 +821,6 @@
                         </div>
                     </div>
 
-                    <!-- 3. NILAI BABAK SELEKSI -->
                     <div class="form-group">
                         <label><i class="fa-solid fa-file-excel"></i> NILAI BABAK SELEKSI <span style="color: #ff4d4f;">*</span></label>
                         
@@ -758,7 +842,6 @@
                         </div>
                     </div>
 
-                    <!-- 4. DOKUMENTASI KEGIATAN -->
                     <div class="form-group">
                         <label><i class="fa-solid fa-images"></i> DOKUMENTASI KEGIATAN <span style="color: #ff4d4f;">*</span></label>
                         <div class="helper-card" style="border-color: rgba(157, 78, 221, 0.4);">
@@ -772,7 +855,6 @@
                         </div>
                     </div>
 
-                    <!-- MINIMALIST PROGRESS BAR -->
                     <div id="progressBox" class="progress-box">
                         <div class="progress-header">
                             <span id="progressPercent">0%</span>
@@ -792,12 +874,26 @@
         </div>
     </main>
 
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-card-success">
+            <div class="modal-icon-success">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2 class="modal-title-success">PENGIRIMAN BERHASIL!</h2>
+            <p class="modal-desc-success">
+                Terima kasih! Berkas <strong>Hasil Babak Seleksi AMSO 2026</strong> telah berhasil dikirim dan tersimpan di sistem.
+            </p>
+            <a href="index.html" class="btn-modal-back">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Administrasi
+            </a>
+        </div>
+    </div>
+
     <footer>
         <strong>AMSO 2026</strong>
         <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
 
-    <!-- SCRIPT PROTEKSI AKSES & PENGIRIMAN DATA -->
     <script>
         // STATUS FORM: GANTI 'true' UNTUK MEMBUKA, 'false' UNTUK MENGUNCI
         const isFormActive = false;
@@ -919,10 +1015,11 @@
 
                 setTimeout(() => {
                     progressBox.style.display = "none";
-                    statusAlert.className = "status-alert status-success";
-                    statusAlert.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Berhasil!</strong> Berkas Hasil Babak Seleksi AMSO 2026 telah berhasil dikirim dan tersimpan.`;
-                    statusAlert.style.display = "flex";
+                    
+                    // MUNCULKAN POPUP MODAL KEBERHASILAN
+                    document.getElementById("successModal").classList.add("active");
 
+                    // Reset Form
                     document.getElementById("seleksiForm").reset();
                     document.getElementById("statusBA").innerText = "Belum ada file dipilih";
                     document.getElementById("statusNilai").innerText = "Belum ada file dipilih";
