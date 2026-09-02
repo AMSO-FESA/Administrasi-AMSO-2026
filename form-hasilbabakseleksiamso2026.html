@@ -488,13 +488,13 @@
             color: #f87171;
         }
 
-        /* ─── HARD LOCK OVERLAY (JIKA LINK DITEMBUS LANGSUNG) ─── */
+        /* ─── HARD LOCK OVERLAY ─── */
         .lock-gatekeeper {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(5, 7, 17, 0.95);
             backdrop-filter: blur(18px);
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 99999;
@@ -572,7 +572,7 @@
 </head>
 <body>
 
-    <!-- OVERLAY GERBANG KUNCI LANGSUNG (DEFAULT: AKTIF) -->
+    <!-- OVERLAY GERBANG KUNCI LANGSUNG -->
     <div id="gatekeeperLock" class="lock-gatekeeper">
         <div class="lock-card">
             <div class="icon-hour"><i class="fa-solid fa-hourglass-half"></i></div>
@@ -641,8 +641,8 @@
         </header>
     </div>
 
-    <!-- MAIN CONTENT FORM (HANYA DITAMPILKAN JIKA DIIZINKAN) -->
-    <main class="container" id="formMainContent" style="display: none;">
+    <!-- MAIN CONTENT FORM -->
+    <main class="container" id="formMainContent">
         <div class="form-wrapper">
             
             <a href="index.html" class="btn-back">
@@ -799,16 +799,19 @@
 
     <!-- SCRIPT PROTEKSI AKSES & PENGIRIMAN DATA -->
     <script>
-        // STATUS FORM: GANTI 'true' BILA FORM SUDAH RESMI DIBUKA
-        const isFormActive = True;
+        // STATUS FORM: GANTI 'true' UNTUK MEMBUKA, 'false' UNTUK MENGUNCI
+        const isFormActive = true;
 
-        // PROTEKSI AKSES OTOMATIS
-        if (!isFormActive) {
-            document.getElementById("gatekeeperLock").style.display = "flex";
-            document.getElementById("formMainContent").style.display = "none";
+        // KONTROL TAMPILAN GERBANG KUNCI
+        const gateLock = document.getElementById("gatekeeperLock");
+        const formContent = document.getElementById("formMainContent");
+
+        if (isFormActive) {
+            gateLock.style.display = "none";
+            formContent.style.display = "block";
         } else {
-            document.getElementById("gatekeeperLock").style.display = "none";
-            document.getElementById("formMainContent").style.display = "block";
+            gateLock.style.display = "flex";
+            formContent.style.display = "none";
         }
 
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8MlorFyNGBxhbItHkMcZ0-aFmb9XknbHFM5DOUB2eEVeA16IdxjDYFQD7CHKpVbIc/exec";
