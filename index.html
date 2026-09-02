@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrasi AMSO 2026</title>
 
-    <!-- FAVICON (LOGO TAB BROWSER) -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/AMSO-FESA/AMSO-2026/main/amso.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -261,7 +260,7 @@
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
         }
 
-        /* ─── ACCORDION DROPDOWN UPLOAD DATA (COMPACT & SCROLLABLE) ─── */
+        /* ACCORDION DROPDOWN UPLOAD DATA */
         .upload-accordion {
             background: rgba(15, 21, 42, 0.85);
             border: 1px solid var(--card-border);
@@ -402,6 +401,7 @@
             gap: 6px;
             white-space: nowrap;
             letter-spacing: 0.3px;
+            transition: all 0.3s ease;
         }
 
         .tag-active {
@@ -568,11 +568,9 @@
         </header>
     </div>
 
-    <!-- MAIN CONTENT -->
     <main class="container">
         <div class="admin-layout">
             
-            <!-- KOLOM KIRI: DAFTAR SURAT -->
             <div class="section-box">
                 <div class="section-title"><i class="fa-solid fa-folder-open"></i> DAFTAR SURAT</div>
                 
@@ -589,11 +587,9 @@
                 </div>
             </div>
 
-            <!-- KOLOM KANAN: UPLOAD DATA (DROPDOWN COMPACT & SCROLLABLE) -->
             <div class="section-box">
                 <div class="section-title"><i class="fa-solid fa-cloud-arrow-up"></i> UPLOAD DATA</div>
                 
-                <!-- ACCORDION DROPDOWN CONTAINER -->
                 <div class="upload-accordion open" id="uploadAccordion">
                     <div class="accordion-header" onclick="toggleAccordion()">
                         <div class="accordion-title-wrap">
@@ -606,7 +602,6 @@
                     <div class="accordion-content">
                         <div class="dropdown-items-list">
                             
-                            <!-- ITEM 1: TRYOUT -->
                             <a href="form-tryout.html" class="dropdown-item-card">
                                 <div class="item-text">
                                     <strong>Form Hasil Tryout AMSO 2026</strong>
@@ -617,15 +612,13 @@
                                 </span>
                             </a>
 
-                            <!-- ITEM 2: BABAK SELEKSI (LOCKED / TERKUNCI) -->
-                            <a href="form-hasilbabakseleksiamso2026.html" class="dropdown-item-card locked" onclick="handleSeleksiClick(event)">
+                            <a href="form-hasilbabakseleksiamso2026.html" id="linkCardSeleksi" class="dropdown-item-card" onclick="handleSeleksiClick(event)">
                                 <div class="item-text">
                                     <strong>Form Hasil Babak Seleksi AMSO 2026</strong>
                                     <small>Berita Acara, Nilai, & Dokumentasi</small>
                                 </div>
-                                <span class="item-btn-tag tag-locked">
-                                    <i class="fa-solid fa-lock"></i> Terkunci
-                                </span>
+                                <span id="tagBtnSeleksi" class="item-btn-tag">
+                                    </span>
                             </a>
 
                         </div>
@@ -637,7 +630,6 @@
         </div>
     </main>
 
-    <!-- CUSTOM POPUP MODAL -->
     <div id="statusModal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
         <div class="modal-card">
             <div class="modal-icon"><i class="fa-solid fa-hourglass-half"></i></div>
@@ -652,22 +644,46 @@
         <p>Angkasa Mathematic & Science Olympiad</p>
     </footer>
 
-    <!-- LOGIKA ACCORDION & KUNCI FORM -->
     <script>
+        // ===============================================================
+        // SAKELAR UTAMA: UBAH 'true' UNTUK MEMBUKA, 'false' UNTUK MENGUNCI
+        // ===============================================================
+        const isSeleksiOpen = true; 
+
+        // Fungsi Auto-Update Tampilan Tombol
+        function updateSeleksiButtonState() {
+            const linkCard = document.getElementById("linkCardSeleksi");
+            const tagBtn = document.getElementById("tagBtnSeleksi");
+
+            if (isSeleksiOpen) {
+                // Tampilan Tombol Saat Dibuka
+                linkCard.classList.remove("locked");
+                tagBtn.className = "item-btn-tag tag-active";
+                tagBtn.innerHTML = `<i class="fa-solid fa-file-circle-check"></i> Buka Form`;
+            } else {
+                // Tampilan Tombol Saat Terkunci
+                linkCard.classList.add("locked");
+                tagBtn.className = "item-btn-tag tag-locked";
+                tagBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Terkunci`;
+            }
+        }
+
+        // Jalankan update saat halaman dibuka
+        updateSeleksiButtonState();
+
+        // Handle Event Klik
+        function handleSeleksiClick(event) {
+            if (!isSeleksiOpen) {
+                event.preventDefault(); // Cegah redirect ke halaman form
+                openModal();
+            }
+            // Jika isSeleksiOpen === true, halaman langsung terbuka secara normal
+        }
+
         // Toggle Accordion Dropdown
         function toggleAccordion() {
             const accordion = document.getElementById("uploadAccordion");
             accordion.classList.toggle("open");
-        }
-
-        // STATUS: TERKUNCI (false)
-        const isSeleksiOpen = false;
-
-        function handleSeleksiClick(event) {
-            if (!isSeleksiOpen) {
-                event.preventDefault(); // Batalkan redirect ke form
-                openModal();
-            }
         }
 
         function openModal() {
