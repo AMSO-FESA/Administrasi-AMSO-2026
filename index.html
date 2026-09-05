@@ -567,8 +567,10 @@
     <main class="container">
         <div class="admin-layout">
             
+            <!-- KOLOM KIRI: DAFTAR SURAT & LAINNYA -->
             <div class="column-left">
                 
+                <!-- KOTAK 1: DAFTAR SURAT -->
                 <div class="section-box">
                     <div class="section-title"><i class="fa-solid fa-folder-open"></i> DAFTAR SURAT</div>
                     
@@ -583,6 +585,7 @@
 
                         <div class="accordion-content">
                             <div class="dropdown-items-list">
+                                <!-- SURAT 1: SELEKSI & BUKU PANDUAN (TERBARU) -->
                                 <a href="https://drive.google.com/file/d/1cHPmGzxoP_odZXuYtTVmFd9KBYY5aF-q/view?usp=sharing" target="_blank" class="dropdown-item-card">
                                     <div class="item-text">
                                         <strong>Pelaksanaan Babak Seleksi dan Link Buku Panduan</strong>
@@ -592,6 +595,7 @@
                                     </span>
                                 </a>
 
+                                <!-- SURAT 2: TRYOUT -->
                                 <a href="https://drive.google.com/file/d/1ezADrPdOI9LZpC3yMRYKXPEPF0VDEp0l/view?usp=drive_link" target="_blank" class="dropdown-item-card">
                                     <div class="item-text">
                                         <strong>Surat Edaran Pelaksanaan Tryout AMSO 2026</strong>
@@ -605,6 +609,7 @@
                     </div>
                 </div>
 
+                <!-- KOTAK 2: LAINNYA (DI BAWAH DAFTAR SURAT) -->
                 <div class="section-box">
                     <div class="section-title"><i class="fa-solid fa-box-archive"></i> LAINNYA</div>
                     
@@ -619,6 +624,17 @@
 
                         <div class="accordion-content">
                             <div class="dropdown-items-list">
+                                <!-- ITEM 1: NAMETAG PESERTA (FILE TERBARU - PALING ATAS) -->
+                                <a href="https://drive.google.com/file/d/1rT4b-zf82lzdBrcW6tRSjK0G3qXXGGu7/view?usp=sharing" target="_blank" class="dropdown-item-card">
+                                    <div class="item-text">
+                                        <strong>Nametag Peserta AMSO 2026</strong>
+                                    </div>
+                                    <span class="item-btn-tag tag-drive">
+                                        <i class="fa-solid fa-expand"></i> Buka & Unduh <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; margin-left: 2px;"></i>
+                                    </span>
+                                </a>
+
+                                <!-- ITEM 2: VIRTUAL BACKGROUND BIMTEK -->
                                 <a href="https://drive.google.com/file/d/1VS_wVVGrsPV4MCy7Q6DAhu7enD1brLOy/view?usp=sharing" target="_blank" class="dropdown-item-card">
                                     <div class="item-text">
                                         <strong>Virtual Background Bimtek AMSO 2026</strong>
@@ -634,6 +650,7 @@
 
             </div>
 
+            <!-- KOLOM KANAN: UPLOAD DATA -->
             <div class="section-box">
                 <div class="section-title"><i class="fa-solid fa-cloud-arrow-up"></i> UPLOAD DATA</div>
                 
@@ -722,6 +739,7 @@
         }
 
         function closeAccordion(accordionId) {
+            // Auto-close saat kursor keluar hanya aktif di perangkat non-touch / Desktop (lebar > 900px)
             if (window.innerWidth > 900) {
                 const accordion = document.getElementById(accordionId);
                 if (accordion) {
