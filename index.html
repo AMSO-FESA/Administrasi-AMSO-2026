@@ -181,6 +181,12 @@
             align-items: start;
         }
 
+        .column-left {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
         .section-box {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -471,10 +477,13 @@
         footer strong { font-size: 18px; }
         footer p { margin-top: 7px; font-size: 11px; opacity: .55; }
 
-        /* PERBAIKAN RESPONSIVE KHUSUS LAYAR HP (ANTI KEPOTONG) */
+        /* RESPONSIVE SMARTPHONE (HP) */
         @media (max-width: 900px) {
             .admin-layout {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .column-left {
                 gap: 20px;
             }
             .section-box {
@@ -558,34 +567,68 @@
     <main class="container">
         <div class="admin-layout">
             
-            <div class="section-box">
-                <div class="section-title"><i class="fa-solid fa-folder-open"></i> DAFTAR SURAT</div>
+            <!-- KOLOM KIRI: DAFTAR SURAT & DESAIN -->
+            <div class="column-left">
                 
-                <div class="admin-accordion" id="suratAccordion" onmouseleave="closeAccordion('suratAccordion')">
-                    <div class="accordion-header" onclick="toggleAccordion('suratAccordion')">
-                        <div class="accordion-title-wrap">
-                            <i class="fa-solid fa-envelope-circle-check"></i>
-                            <span>Pilih Surat</span>
+                <!-- KOTAK 1: DAFTAR SURAT -->
+                <div class="section-box">
+                    <div class="section-title"><i class="fa-solid fa-folder-open"></i> DAFTAR SURAT</div>
+                    
+                    <div class="admin-accordion" id="suratAccordion" onmouseleave="closeAccordion('suratAccordion')">
+                        <div class="accordion-header" onclick="toggleAccordion('suratAccordion')">
+                            <div class="accordion-title-wrap">
+                                <i class="fa-solid fa-envelope-circle-check"></i>
+                                <span>Pilih Surat</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
                         </div>
-                        <i class="fa-solid fa-chevron-down accordion-arrow"></i>
-                    </div>
 
-                    <div class="accordion-content">
-                        <div class="dropdown-items-list">
-                            <a href="https://drive.google.com/file/d/1ezADrPdOI9LZpC3yMRYKXPEPF0VDEp0l/view?usp=drive_link" target="_blank" class="dropdown-item-card">
-                                <div class="item-text">
-                                    <strong>Surat Edaran Pelaksanaan Tryout AMSO 2026</strong>
-                                </div>
-                                <span class="item-btn-tag tag-drive">
-                                    <i class="fa-brands fa-google-drive"></i> Unduh Surat <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; margin-left: 2px;"></i>
-                                </span>
-                            </a>
+                        <div class="accordion-content">
+                            <div class="dropdown-items-list">
+                                <a href="https://drive.google.com/file/d/1ezADrPdOI9LZpC3yMRYKXPEPF0VDEp0l/view?usp=drive_link" target="_blank" class="dropdown-item-card">
+                                    <div class="item-text">
+                                        <strong>Surat Edaran Pelaksanaan Tryout AMSO 2026</strong>
+                                    </div>
+                                    <span class="item-btn-tag tag-drive">
+                                        <i class="fa-brands fa-google-drive"></i> Unduh Surat <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; margin-left: 2px;"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KOTAK 2: DESAIN (DI BAWAH DAFTAR SURAT) -->
+                <div class="section-box">
+                    <div class="section-title"><i class="fa-solid fa-palette"></i> DESAIN</div>
+                    
+                    <div class="admin-accordion" id="desainAccordion" onmouseleave="closeAccordion('desainAccordion')">
+                        <div class="accordion-header" onclick="toggleAccordion('desainAccordion')">
+                            <div class="accordion-title-wrap">
+                                <i class="fa-solid fa-image"></i>
+                                <span>Pilih Desain</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+                        </div>
+
+                        <div class="accordion-content">
+                            <div class="dropdown-items-list">
+                                <a href="https://drive.google.com/file/d/1VS_wVVGrsPV4MCy7Q6DAhu7enD1brLOy/view?usp=sharing" target="_blank" class="dropdown-item-card">
+                                    <div class="item-text">
+                                        <strong>Virtual Background Bimtek AMSO 2026</strong>
+                                    </div>
+                                    <span class="item-btn-tag tag-drive">
+                                        <i class="fa-solid fa-expand"></i> Buka & Unduh <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; margin-left: 2px;"></i>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
 
+            <!-- KOLOM KANAN: UPLOAD DATA -->
             <div class="section-box">
                 <div class="section-title"><i class="fa-solid fa-cloud-arrow-up"></i> UPLOAD DATA</div>
                 
@@ -615,7 +658,7 @@
                                     <strong>Form Hasil Babak Seleksi AMSO 2026</strong>
                                 </div>
                                 <span id="tagBtnSeleksi" class="item-btn-tag">
-                                    </span>
+                                </span>
                             </a>
 
                         </div>
