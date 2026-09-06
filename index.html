@@ -756,7 +756,7 @@
                                 <div class="nested-accordion" id="soalSeleksiAccordion">
                                     <div class="nested-header" onclick="handleSoalSeleksiClick(event)">
                                         <div class="item-text">
-                                            <strong><i class="fa-solid fa-book-open" style="color: var(--gold); margin-right: 6px;"></i> Soal Babak Seleksi AMSO 2026</strong>
+                                            <strong>Soal Babak Seleksi AMSO 2026</strong>
                                         </div>
                                         <span id="tagBtnSoalSeleksi" class="item-btn-tag">
                                         </span>
@@ -907,19 +907,16 @@
         function updateSoalSeleksiState() {
             const soalCard = document.getElementById("soalSeleksiAccordion");
             const tagBtn = document.getElementById("tagBtnSoalSeleksi");
-            const subtext = document.getElementById("subtextSoalSeleksi");
 
             if (isSoalSeleksiOpen) {
                 soalCard.classList.remove("locked");
                 tagBtn.className = "item-btn-tag tag-drive";
                 tagBtn.innerHTML = `Buka Soal <i class="fa-solid fa-chevron-down nested-arrow" style="font-size: 0.7rem; margin-left: 3px;"></i>`;
-                subtext.innerText = "Pilih Jenjang SD, SMP, atau SMA";
             } else {
                 soalCard.classList.remove("open");
                 soalCard.classList.add("locked");
                 tagBtn.className = "item-btn-tag tag-locked";
                 tagBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Terkunci`;
-                subtext.innerText = "Naskah soal belum dapat diakses";
             }
         }
 
