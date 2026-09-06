@@ -341,9 +341,6 @@
             color: #fff;
             font-weight: 700;
             line-height: 1.4;
-            white-space: normal;
-            word-break: normal;
-            overflow-wrap: break-word;
         }
 
         .item-text small {
@@ -394,11 +391,11 @@
 
         /* ─── NESTED ACCORDION KHUSUS SOAL BABAK SELEKSI ─── */
         .nested-accordion {
-            background: rgba(18, 24, 46, 0.85);
-            border: 1px solid rgba(0, 210, 255, 0.25);
-            border-radius: 14px;
+            background: rgba(20, 26, 50, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             width: 100%;
         }
 
@@ -406,30 +403,23 @@
             border-color: var(--neon-blue);
         }
 
-        .nested-accordion.locked {
-            border-color: rgba(255, 215, 0, 0.3);
-        }
-
         .nested-accordion.locked:hover {
-            border-color: rgba(255, 215, 0, 0.6);
-            background: rgba(255, 215, 0, 0.05);
+            border-color: rgba(255, 215, 0, 0.5);
+            background: rgba(255, 215, 0, 0.06);
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
         }
 
         .nested-header {
-            padding: 13px 16px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
             user-select: none;
-            background: rgba(255, 255, 255, 0.02);
+            background: transparent;
             transition: all 0.25s ease;
             gap: 12px;
-        }
-
-        .nested-header:hover {
-            background: rgba(0, 210, 255, 0.08);
+            width: 100%;
         }
 
         .nested-content {
@@ -484,16 +474,15 @@
 
         .mapel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 8px;
             padding: 10px;
         }
 
         .mapel-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 6px;
+            justify-content: space-between;
             background: rgba(15, 21, 42, 0.9);
             border: 1px solid rgba(0, 210, 255, 0.2);
             border-radius: 8px;
@@ -619,41 +608,22 @@
         }
 
         @media (max-width: 600px) {
+            /* Tampilan HP: tombol selalu di bawah dan selebar kartu */
+            .dropdown-item-card,
             .nested-header {
-                flex-direction: row !important;
-                align-items: center !important;
-                justify-content: space-between !important;
-                gap: 12px !important;
-                padding: 12px 14px !important;
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 10px !important;
+                padding: 12px !important;
             }
-            .nested-header .item-text {
-                flex: 1 1 auto !important;
-                min-width: 0 !important;
-            }
-            .nested-header .item-text strong {
-                font-size: 0.86rem !important;
-                line-height: 1.35 !important;
-                white-space: normal !important;
-            }
+            .dropdown-item-card .item-btn-tag,
             .nested-header .item-btn-tag {
-                width: auto !important;
-                flex: 0 0 auto !important;
-                padding: 6px 12px !important;
-                font-size: 0.72rem !important;
-            }
-            .dropdown-item-card {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 10px;
-                padding: 12px;
-            }
-            .dropdown-item-card .item-btn-tag {
-                width: 100%;
-                text-align: center;
-                padding: 8px 14px;
+                width: 100% !important;
+                text-align: center !important;
+                padding: 8px 14px !important;
             }
             .mapel-grid {
-                grid-template-columns: repeat(3, 1fr) !important;
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
@@ -719,8 +689,10 @@
     <main class="container">
         <div class="admin-layout">
             
+            <!-- KOLOM KIRI: DAFTAR SURAT & LAINNYA -->
             <div class="column-left">
                 
+                <!-- KOTAK 1: DAFTAR SURAT -->
                 <div class="section-box">
                     <div class="section-title"><i class="fa-solid fa-folder-open"></i> DAFTAR SURAT</div>
                     
@@ -735,6 +707,7 @@
 
                         <div class="accordion-content">
                             <div class="dropdown-items-list">
+                                <!-- SURAT 1: SELEKSI & BUKU PANDUAN (TERBARU) -->
                                 <a href="https://drive.google.com/file/d/1cHPmGzxoP_odZXuYtTVmFd9KBYY5aF-q/view?usp=sharing" target="_blank" class="dropdown-item-card">
                                     <div class="item-text">
                                         <strong>Pelaksanaan Babak Seleksi dan Link Buku Panduan</strong>
@@ -744,6 +717,7 @@
                                     </span>
                                 </a>
 
+                                <!-- SURAT 2: TRYOUT -->
                                 <a href="https://drive.google.com/file/d/1ezADrPdOI9LZpC3yMRYKXPEPF0VDEp0l/view?usp=drive_link" target="_blank" class="dropdown-item-card">
                                     <div class="item-text">
                                         <strong>Surat Edaran Pelaksanaan Tryout AMSO 2026</strong>
@@ -757,6 +731,7 @@
                     </div>
                 </div>
 
+                <!-- KOTAK 2: LAINNYA (DI BAWAH DAFTAR SURAT) -->
                 <div class="section-box">
                     <div class="section-title"><i class="fa-solid fa-box-archive"></i> LAINNYA</div>
                     
@@ -772,6 +747,7 @@
                         <div class="accordion-content">
                             <div class="dropdown-items-list">
 
+                                <!-- ITEM 1: SOAL BABAK SELEKSI (DENGAN KONTROL JS TRUE/FALSE) -->
                                 <div class="nested-accordion" id="soalSeleksiAccordion">
                                     <div class="nested-header" onclick="handleSoalSeleksiClick(event)">
                                         <div class="item-text">
@@ -782,6 +758,7 @@
                                     </div>
 
                                     <div class="nested-content">
+                                        <!-- JENJANG SD / MI -->
                                         <div class="jenjang-group">
                                             <div class="jenjang-title"><i class="fa-solid fa-graduation-cap"></i> JENJANG SD / MI</div>
                                             <div class="mapel-grid">
@@ -791,6 +768,7 @@
                                             </div>
                                         </div>
 
+                                        <!-- JENJANG SMP / MTs -->
                                         <div class="jenjang-group">
                                             <div class="jenjang-title"><i class="fa-solid fa-graduation-cap"></i> JENJANG SMP / MTs</div>
                                             <div class="mapel-grid">
@@ -800,6 +778,7 @@
                                             </div>
                                         </div>
 
+                                        <!-- JENJANG SMA -->
                                         <div class="jenjang-group">
                                             <div class="jenjang-title"><i class="fa-solid fa-graduation-cap"></i> JENJANG SMA</div>
                                             <div class="mapel-grid">
@@ -813,6 +792,7 @@
                                     </div>
                                 </div>
 
+                                <!-- ITEM 2: NAMETAG PESERTA -->
                                 <a href="https://drive.google.com/file/d/1rT4b-zf82lzdBrcW6tRSjK0G3qXXGGu7/view?usp=sharing" target="_blank" class="dropdown-item-card">
                                     <div class="item-text">
                                         <strong>Nametag Peserta AMSO 2026</strong>
@@ -822,6 +802,7 @@
                                     </span>
                                 </a>
 
+                                <!-- ITEM 3: VIRTUAL BACKGROUND BIMTEK -->
                                 <a href="https://drive.google.com/file/d/1VS_wVVGrsPV4MCy7Q6DAhu7enD1brLOy/view?usp=sharing" target="_blank" class="dropdown-item-card">
                                     <div class="item-text">
                                         <strong>Virtual Background Bimtek AMSO 2026</strong>
@@ -837,6 +818,7 @@
 
             </div>
 
+            <!-- KOLOM KANAN: UPLOAD DATA -->
             <div class="section-box">
                 <div class="section-title"><i class="fa-solid fa-cloud-arrow-up"></i> UPLOAD DATA</div>
                 
@@ -898,7 +880,7 @@
         // Ganti 'true' untuk BUKA, 'false' untuk KUNCI
         // ==========================================
         const isSeleksiOpen = true; 
-        const isSoalSeleksiOpen = false; // <-- KONTROL SOAL BABAK SELEKSI (Saat ini Terkunci)
+        const isSoalSeleksiOpen = true; // <-- KONTROL SOAL BABAK SELEKSI (Saat ini Terkunci)
 
         // Kontrol Tombol Form Seleksi
         function updateSeleksiButtonState() {
