@@ -843,15 +843,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label><i class="fa-solid fa-images"></i> DOKUMENTASI KEGIATAN <span style="color: #ff4d4f;">*</span></label>
+                        <label><i class="fa-solid fa-camera"></i> DOKUMENTASI KEGIATAN <span style="color: #ff4d4f;">*</span></label>
                         <div class="helper-card" style="border-color: rgba(157, 78, 221, 0.4);">
-                            <span><i class="fa-solid fa-circle-info" style="color: var(--neon-purple);"></i> Dijadikan 1 File Ms. Word / PDF</span>
+                            <span><i class="fa-solid fa-circle-info" style="color: var(--neon-purple);"></i> 1 Foto Terbaik Kegiatan Seleksi</span>
                         </div>
                         <div class="file-upload-box">
-                            <i class="fa-solid fa-file-lines" style="color: var(--neon-purple);"></i>
-                            <span>Klik untuk upload Dokumentasi (.pdf, .doc, .docx)</span>
+                            <i class="fa-solid fa-image" style="color: var(--neon-purple);"></i>
+                            <span>Klik untuk upload 1 Foto Terbaik (.jpg, .jpeg, .png)</span>
                             <div id="statusDok" class="file-status-text">Belum ada file dipilih</div>
-                            <input type="file" id="inputDok" accept=".pdf,.doc,.docx" required onchange="processFile(this, 'statusDok', 'dok')">
+                            <input type="file" id="inputDok" accept=".jpg,.jpeg,.png,image/*" required onchange="processFile(this, 'statusDok', 'dok')">
                         </div>
                     </div>
 
@@ -928,6 +928,21 @@
             const statusDisplay = document.getElementById(statusElementId);
 
             if (file) {
+                // Validasi khusus field dokumentasi agar wajib gambar/foto
+                if (key === 'dok') {
+                    const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                    const fileNameLower = file.name.toLowerCase();
+                    const isImgExt = fileNameLower.endsWith('.jpg') || fileNameLower.endsWith('.jpeg') || fileNameLower.endsWith('.png');
+
+                    if (!validImageTypes.includes(file.type) && !isImgExt) {
+                        alert("Format tidak valid! Untuk dokumentasi wajib berupa foto/gambar (.jpg, .jpeg, .png).");
+                        input.value = "";
+                        statusDisplay.innerText = "Belum ada file dipilih";
+                        filesData[key] = null;
+                        return;
+                    }
+                }
+
                 if (file.size > 8 * 1024 * 1024) {
                     alert("Ukuran file maksimal 8MB per file.");
                     input.value = "";
@@ -942,7 +957,7 @@
                     const base64 = await readFileAsBase64(file);
                     filesData[key] = {
                         name: file.name,
-                        mime: file.type || "application/octet-stream",
+                        mime: file.type || (key === 'dok' ? "image/jpeg" : "application/octet-stream"),
                         data: base64
                     };
                     statusDisplay.innerHTML = `<i class="fa-solid fa-check-circle" style="color: #4ade80;"></i> ${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} MB)`;
