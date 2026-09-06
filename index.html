@@ -281,7 +281,7 @@
         }
 
         .admin-accordion.open .accordion-content {
-            max-height: 380px;
+            max-height: 650px;
             overflow-y: auto;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
@@ -389,6 +389,120 @@
             background: rgba(255, 215, 0, 0.15);
             color: var(--gold);
             border: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        /* ─── NESTED ACCORDION KHUSUS SOAL BABAK SELEKSI ─── */
+        .nested-accordion {
+            background: rgba(18, 24, 46, 0.85);
+            border: 1px solid rgba(0, 210, 255, 0.25);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .nested-accordion:hover {
+            border-color: var(--neon-blue);
+        }
+
+        .nested-header {
+            padding: 13px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.25s ease;
+        }
+
+        .nested-header:hover {
+            background: rgba(0, 210, 255, 0.08);
+        }
+
+        .nested-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: rgba(12, 16, 32, 0.9);
+            padding: 0 12px;
+        }
+
+        .nested-accordion.open .nested-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nested-accordion.open .nested-content {
+            max-height: 600px;
+            padding: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nested-arrow {
+            color: var(--neon-blue);
+            font-size: 0.85rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Sub Category Jenjang Box */
+        .jenjang-group {
+            margin-bottom: 12px;
+            background: rgba(20, 26, 50, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .jenjang-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .jenjang-title {
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--gold);
+            font-family: 'Orbitron', sans-serif;
+            background: rgba(255, 215, 0, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mapel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 8px;
+            padding: 10px;
+        }
+
+        .mapel-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(15, 21, 42, 0.9);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-radius: 8px;
+            padding: 8px 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        .mapel-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.25), rgba(157, 78, 221, 0.25));
+            border-color: var(--neon-blue);
+            transform: translateY(-2px);
+            color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+        }
+
+        .mapel-btn i {
+            font-size: 0.75rem;
+            color: var(--neon-blue);
         }
 
         /* CUSTOM GLOW MODAL POPUP */
@@ -502,6 +616,9 @@
                 width: 100%;
                 text-align: center;
                 padding: 8px 14px;
+            }
+            .mapel-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
@@ -624,7 +741,55 @@
 
                         <div class="accordion-content">
                             <div class="dropdown-items-list">
-                                <!-- ITEM 1: NAMETAG PESERTA (FILE TERBARU - PALING ATAS) -->
+
+                                <!-- ITEM 1: SOAL BABAK SELEKSI (DROPDOWN BERTINGKAT PALING ATAS - DEFAULT OPEN) -->
+                                <div class="nested-accordion open" id="soalSeleksiAccordion">
+                                    <div class="nested-header" onclick="toggleNested('soalSeleksiAccordion', event)">
+                                        <div class="item-text">
+                                            <strong><i class="fa-solid fa-book-open" style="color: var(--gold); margin-right: 6px;"></i> Soal Babak Seleksi AMSO 2026</strong>
+                                            <small>Pilih Jenjang SD, SMP, atau SMA</small>
+                                        </div>
+                                        <span class="item-btn-tag tag-drive" style="pointer-events: none;">
+                                            Buka Soal <i class="fa-solid fa-chevron-down nested-arrow" style="font-size: 0.7rem; margin-left: 3px;"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="nested-content">
+                                        <!-- JENJANG SD / MI -->
+                                        <div class="jenjang-group">
+                                            <div class="jenjang-title"><i class="fa-solid fa-graduation-cap"></i> JENJANG SD / MI</div>
+                                            <div class="mapel-grid">
+                                                <a href="https://docs.google.com/document/d/18P1huKfc-B4Xdls17lAmpvDjv7IqkQJt/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">MTK <i class="fa-solid fa-download"></i></a>
+                                                <a href="https://docs.google.com/document/d/18V5krtwp6KGxpmWiqefztsbvzJprbo44/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">IPA <i class="fa-solid fa-download"></i></a>
+                                                <a href="https://docs.google.com/document/d/1ZdH5c9CF3EXiy5Y1xgo74nYwOInCwO3K/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">IPS <i class="fa-solid fa-download"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <!-- JENJANG SMP / MTs -->
+                                        <div class="jenjang-group">
+                                            <div class="jenjang-title"><i class="fa-solid fa-graduation-cap"></i> JENJANG SMP / MTs</div>
+                                            <div class="mapel-grid">
+                                                <a href="https://docs.google.com/document/d/1lLcH8MEG-e5J2yKbjj4tdX9l-rlqOwVm/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">MTK <i class="fa-solid fa-download"></i></a>
+                                                <a href="https://docs.google.com/document/d/1smgAQ2_Jgri9c_9v79r0I6xJj-IXx4WF/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">IPA <i class="fa-solid fa-download"></i></a>
+                                                <a href="https://docs.google.com/document/d/1WB4oMwm-2VuHCccu2iMrNYZRbXfke_Za/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">IPS <i class="fa-solid fa-download"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <!-- JENJANG SMA -->
+                                        <div class="jenjang-group">
+                                            <div class="jenjang-title"><i class="fa-solid fa-graduation-cap"></i> JENJANG SMA</div>
+                                            <div class="mapel-grid">
+                                                <a href="https://docs.google.com/document/d/1Cp2nrhUpU8OAcnV4cIKpUdSd2ZAwb0f2/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">MTK <i class="fa-solid fa-download"></i></a>
+                                                <a href="https://docs.google.com/document/d/1We89h01E4hAV_-dKFqgHL0HxxrQRJin2/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">FIS <i class="fa-solid fa-download"></i></a>
+                                                <a href="https://docs.google.com/document/d/14cp86WXYmwFu82MW-GWSLRzicMBrRI11/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">EKO <i class="fa-solid fa-download"></i></a>
+                                                <a href="https://docs.google.com/document/d/1Bnp7rQGOreVb6axqPgYnh3n6s_kHZg0l/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">GEO <i class="fa-solid fa-download"></i></a>
+                                                <a href="https://docs.google.com/document/d/1ROSPTy4pXs2rX8m14TmlzA6btGe7IyPI/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">TIK <i class="fa-solid fa-download"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ITEM 2: NAMETAG PESERTA -->
                                 <a href="https://drive.google.com/file/d/1rT4b-zf82lzdBrcW6tRSjK0G3qXXGGu7/view?usp=sharing" target="_blank" class="dropdown-item-card">
                                     <div class="item-text">
                                         <strong>Nametag Peserta AMSO 2026</strong>
@@ -634,7 +799,7 @@
                                     </span>
                                 </a>
 
-                                <!-- ITEM 2: VIRTUAL BACKGROUND BIMTEK -->
+                                <!-- ITEM 3: VIRTUAL BACKGROUND BIMTEK -->
                                 <a href="https://drive.google.com/file/d/1VS_wVVGrsPV4MCy7Q6DAhu7enD1brLOy/view?usp=sharing" target="_blank" class="dropdown-item-card">
                                     <div class="item-text">
                                         <strong>Virtual Background Bimtek AMSO 2026</strong>
@@ -746,6 +911,13 @@
                     accordion.classList.remove("open");
                 }
             }
+        }
+
+        // Toggle khusus untuk Sub-Dropdown Soal Babak Seleksi
+        function toggleNested(nestedId, event) {
+            event.stopPropagation();
+            const nested = document.getElementById(nestedId);
+            nested.classList.toggle("open");
         }
 
         function openModal() {
