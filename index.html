@@ -405,6 +405,16 @@
             border-color: var(--neon-blue);
         }
 
+        .nested-accordion.locked {
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .nested-accordion.locked:hover {
+            border-color: rgba(255, 215, 0, 0.6);
+            background: rgba(255, 215, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
+        }
+
         .nested-header {
             padding: 13px 16px;
             display: flex;
@@ -742,15 +752,13 @@
                         <div class="accordion-content">
                             <div class="dropdown-items-list">
 
-                                <!-- ITEM 1: SOAL BABAK SELEKSI (DROPDOWN BERTINGKAT PALING ATAS - DEFAULT OPEN) -->
-                                <div class="nested-accordion open" id="soalSeleksiAccordion">
-                                    <div class="nested-header" onclick="toggleNested('soalSeleksiAccordion', event)">
+                                <!-- ITEM 1: SOAL BABAK SELEKSI (DENGAN KONTROL JS TRUE/FALSE) -->
+                                <div class="nested-accordion" id="soalSeleksiAccordion">
+                                    <div class="nested-header" onclick="handleSoalSeleksiClick(event)">
                                         <div class="item-text">
                                             <strong><i class="fa-solid fa-book-open" style="color: var(--gold); margin-right: 6px;"></i> Soal Babak Seleksi AMSO 2026</strong>
-                                            <small>Pilih Jenjang SD, SMP, atau SMA</small>
                                         </div>
-                                        <span class="item-btn-tag tag-drive" style="pointer-events: none;">
-                                            Buka Soal <i class="fa-solid fa-chevron-down nested-arrow" style="font-size: 0.7rem; margin-left: 3px;"></i>
+                                        <span id="tagBtnSoalSeleksi" class="item-btn-tag">
                                         </span>
                                     </div>
 
@@ -860,8 +868,8 @@
     <div id="statusModal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
         <div class="modal-card">
             <div class="modal-icon"><i class="fa-solid fa-hourglass-half"></i></div>
-            <h2 class="modal-title">Belum Tersedia</h2>
-            <p class="modal-desc">Formulir <strong>Hasil Babak Seleksi AMSO 2026</strong> saat ini belum dibuka. Silakan cek kembali sesuai jadwal yang telah ditentukan.</p>
+            <h2 class="modal-title" id="modalTitleText">Belum Tersedia</h2>
+            <p class="modal-desc" id="modalDescText">Formulir <strong>Hasil Babak Seleksi AMSO 2026</strong> saat ini belum dibuka. Silakan cek kembali sesuai jadwal yang telah ditentukan.</p>
             <button class="btn-modal-close" onclick="closeModal()">Mengerti</button>
         </div>
     </div>
@@ -872,8 +880,14 @@
     </footer>
 
     <script>
+        // ==========================================
+        // 1. STATUS PENGUNCIAN FORM & SOAL SELEKSI
+        // Ganti 'true' untuk BUKA, 'false' untuk KUNCI
+        // ==========================================
         const isSeleksiOpen = true; 
+        const isSoalSeleksiOpen = false; // <-- KONTROL SOAL BABAK SELEKSI (Saat ini Terkunci)
 
+        // Kontrol Tombol Form Seleksi
         function updateSeleksiButtonState() {
             const linkCard = document.getElementById("linkCardSeleksi");
             const tagBtn = document.getElementById("tagBtnSeleksi");
@@ -889,12 +903,50 @@
             }
         }
 
+        // Kontrol Tombol/Accordion Soal Babak Seleksi
+        function updateSoalSeleksiState() {
+            const soalCard = document.getElementById("soalSeleksiAccordion");
+            const tagBtn = document.getElementById("tagBtnSoalSeleksi");
+            const subtext = document.getElementById("subtextSoalSeleksi");
+
+            if (isSoalSeleksiOpen) {
+                soalCard.classList.remove("locked");
+                tagBtn.className = "item-btn-tag tag-drive";
+                tagBtn.innerHTML = `Buka Soal <i class="fa-solid fa-chevron-down nested-arrow" style="font-size: 0.7rem; margin-left: 3px;"></i>`;
+                subtext.innerText = "Pilih Jenjang SD, SMP, atau SMA";
+            } else {
+                soalCard.classList.remove("open");
+                soalCard.classList.add("locked");
+                tagBtn.className = "item-btn-tag tag-locked";
+                tagBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Terkunci`;
+                subtext.innerText = "Naskah soal belum dapat diakses";
+            }
+        }
+
         updateSeleksiButtonState();
+        updateSoalSeleksiState();
 
         function handleSeleksiClick(event) {
             if (!isSeleksiOpen) {
                 event.preventDefault();
-                openModal();
+                openModal(
+                    "Belum Tersedia",
+                    "Formulir <strong>Hasil Babak Seleksi AMSO 2026</strong> saat ini belum dibuka. Silakan cek kembali sesuai jadwal yang telah ditentukan."
+                );
+            }
+        }
+
+        // Handler Klik Khusus Soal Babak Seleksi
+        function handleSoalSeleksiClick(event) {
+            event.stopPropagation();
+            if (!isSoalSeleksiOpen) {
+                openModal(
+                    "Belum Tersedia",
+                    "Naskah berkas <strong>Soal Babak Seleksi AMSO 2026</strong> saat ini belum dapat diunduh. Silakan kembali sesuai jadwal pelaksanaan ujian."
+                );
+            } else {
+                const nested = document.getElementById("soalSeleksiAccordion");
+                nested.classList.toggle("open");
             }
         }
 
@@ -904,7 +956,6 @@
         }
 
         function closeAccordion(accordionId) {
-            // Auto-close saat kursor keluar hanya aktif di perangkat non-touch / Desktop (lebar > 900px)
             if (window.innerWidth > 900) {
                 const accordion = document.getElementById(accordionId);
                 if (accordion) {
@@ -913,14 +964,9 @@
             }
         }
 
-        // Toggle khusus untuk Sub-Dropdown Soal Babak Seleksi
-        function toggleNested(nestedId, event) {
-            event.stopPropagation();
-            const nested = document.getElementById(nestedId);
-            nested.classList.toggle("open");
-        }
-
-        function openModal() {
+        function openModal(title, desc) {
+            if (title) document.getElementById("modalTitleText").innerHTML = title;
+            if (desc) document.getElementById("modalDescText").innerHTML = desc;
             document.getElementById("statusModal").classList.add("active");
         }
 
