@@ -502,6 +502,25 @@
             box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
         }
 
+        .mapel-btn.locked-mapel {
+            background: rgba(255, 215, 0, 0.05);
+            border-color: rgba(255, 215, 0, 0.3);
+            color: var(--gold);
+            cursor: pointer;
+        }
+
+        .mapel-btn.locked-mapel:hover {
+            background: rgba(255, 215, 0, 0.12);
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .mapel-btn.locked-mapel i {
+            color: var(--gold);
+        }
+
         .mapel-btn i {
             font-size: 0.75rem;
             color: var(--neon-blue);
@@ -746,7 +765,7 @@
                         <div class="accordion-content">
                             <div class="dropdown-items-list">
 
-                                <!-- ITEM 1: SOAL BABAK SELEKSI (POSISI PALING ATAS - DENGAN KONTROL JS TRUE/FALSE) -->
+                                <!-- ITEM 1: SOAL BABAK SELEKSI -->
                                 <div class="nested-accordion" id="soalSeleksiAccordion">
                                     <div class="nested-header" onclick="handleSoalSeleksiClick(event)">
                                         <div class="item-text">
@@ -782,7 +801,8 @@
                                             <div class="jenjang-title"><i class="fa-solid fa-graduation-cap"></i> JENJANG SMA</div>
                                             <div class="mapel-grid">
                                                 <a href="https://docs.google.com/document/d/1Cp2nrhUpU8OAcnV4cIKpUdSd2ZAwb0f2/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">MTK <i class="fa-solid fa-download"></i></a>
-                                                <a href="https://docs.google.com/document/d/1We89h01E4hAV_-dKFqgHL0HxxrQRJin2/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">FIS <i class="fa-solid fa-download"></i></a>
+                                                <!-- FISIKA SMA DIKUNCI SEMENTARA -->
+                                                <a href="#" onclick="handleLockedFisika(event)" class="mapel-btn locked-mapel">FIS <i class="fa-solid fa-lock"></i></a>
                                                 <a href="https://docs.google.com/document/d/14cp86WXYmwFu82MW-GWSLRzicMBrRI11/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">EKO <i class="fa-solid fa-download"></i></a>
                                                 <a href="https://docs.google.com/document/d/1Bnp7rQGOreVb6axqPgYnh3n6s_kHZg0l/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">GEO <i class="fa-solid fa-download"></i></a>
                                                 <a href="https://docs.google.com/document/d/1ROSPTy4pXs2rX8m14TmlzA6btGe7IyPI/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">TIK <i class="fa-solid fa-download"></i></a>
@@ -790,16 +810,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- ITEM BARU: FILE PAPARAN BIMTEK BABAK SELEKSI AMSO 2026 -->
-                                <a href="https://drive.google.com/file/d/1vuCWhvWCCbzqBYhlITCmPM4qBgVXrv-j/view?usp=sharing" target="_blank" class="dropdown-item-card">
-                                    <div class="item-text">
-                                        <strong>File Paparan Bimtek Babak Seleksi AMSO 2026</strong>
-                                    </div>
-                                    <span class="item-btn-tag tag-drive">
-                                        <i class="fa-solid fa-expand"></i> Buka & Unduh <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.65rem; margin-left: 2px;"></i>
-                                    </span>
-                                </a>
 
                                 <!-- ITEM 2: NAMETAG PESERTA -->
                                 <a href="https://drive.google.com/file/d/1rT4b-zf82lzdBrcW6tRSjK0G3qXXGGu7/view?usp=sharing" target="_blank" class="dropdown-item-card">
@@ -889,7 +899,7 @@
         // Ganti 'true' untuk BUKA, 'false' untuk KUNCI
         // ==========================================
         const isSeleksiOpen = true; 
-        const isSoalSeleksiOpen = true; // <-- KONTROL SOAL BABAK SELEKSI (Saat ini Terkunci)
+        const isSoalSeleksiOpen = true; // Buka accordion soal
 
         // Kontrol Tombol Form Seleksi
         function updateSeleksiButtonState() {
@@ -949,6 +959,16 @@
                 const nested = document.getElementById("soalSeleksiAccordion");
                 nested.classList.toggle("open");
             }
+        }
+
+        // Handler Klik Fisika SMA Terkunci
+        function handleLockedFisika(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            openModal(
+                "Sedang Diperbaiki",
+                "Berkas naskah soal <strong>Fisika (SMA)</strong> sedang dalam peninjauan dan perbaikan. Silakan cek kembali beberapa saat lagi."
+            );
         }
 
         function toggleAccordion(accordionId) {
