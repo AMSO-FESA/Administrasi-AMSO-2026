@@ -502,25 +502,6 @@
             box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
         }
 
-        .mapel-btn.locked-mapel {
-            background: rgba(255, 215, 0, 0.05);
-            border-color: rgba(255, 215, 0, 0.3);
-            color: var(--gold);
-            cursor: pointer;
-        }
-
-        .mapel-btn.locked-mapel:hover {
-            background: rgba(255, 215, 0, 0.12);
-            border-color: var(--gold);
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
-            color: var(--gold);
-            transform: translateY(-2px);
-        }
-
-        .mapel-btn.locked-mapel i {
-            color: var(--gold);
-        }
-
         .mapel-btn i {
             font-size: 0.75rem;
             color: var(--neon-blue);
@@ -801,8 +782,7 @@
                                             <div class="jenjang-title"><i class="fa-solid fa-graduation-cap"></i> JENJANG SMA</div>
                                             <div class="mapel-grid">
                                                 <a href="https://docs.google.com/document/d/1Cp2nrhUpU8OAcnV4cIKpUdSd2ZAwb0f2/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">MTK <i class="fa-solid fa-download"></i></a>
-                                                <!-- FISIKA SMA DIKUNCI SEMENTARA -->
-                                                <a href="#" onclick="handleLockedFisika(event)" class="mapel-btn locked-mapel">FIS <i class="fa-solid fa-lock"></i></a>
+                                                <a href="https://docs.google.com/document/d/1We89h01E4hAV_-dKFqgHL0HxxrQRJin2/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">FIS <i class="fa-solid fa-download"></i></a>
                                                 <a href="https://docs.google.com/document/d/14cp86WXYmwFu82MW-GWSLRzicMBrRI11/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">EKO <i class="fa-solid fa-download"></i></a>
                                                 <a href="https://docs.google.com/document/d/1Bnp7rQGOreVb6axqPgYnh3n6s_kHZg0l/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">GEO <i class="fa-solid fa-download"></i></a>
                                                 <a href="https://docs.google.com/document/d/1ROSPTy4pXs2rX8m14TmlzA6btGe7IyPI/edit?usp=sharing&ouid=100867128714924034158&rtpof=true&sd=true" target="_blank" class="mapel-btn">TIK <i class="fa-solid fa-download"></i></a>
@@ -959,16 +939,6 @@
                 const nested = document.getElementById("soalSeleksiAccordion");
                 nested.classList.toggle("open");
             }
-        }
-
-        // Handler Klik Fisika SMA Terkunci
-        function handleLockedFisika(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            openModal(
-                "Sedang Diperbaiki",
-                "Berkas naskah soal <strong>Fisika (SMA)</strong> sedang dalam peninjauan dan perbaikan. Silakan cek kembali beberapa saat lagi."
-            );
         }
 
         function toggleAccordion(accordionId) {
